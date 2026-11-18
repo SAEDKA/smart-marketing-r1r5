@@ -1,0 +1,249 @@
+"use client";
+
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  useCallback,
+} from "react";
+import { useRouter } from "next/navigation";
+import {
+  AuthSession,
+  AuthUser,
+  LoginRequest,
+  RegisterRequest,
+  UserRole,
+} from "@/types/domain";
+import { authApi } from "@/lib/api/auth.api";
+import { tierForUser, type AccessTier } from "@/lib/access/access";
+import { saveAccessToken, clearAccessToken } from "@/lib/auth-storage";
+
+interface AuthContextValue {
+  session: AuthSession | null;
+  user: AuthUser | null;
+  isLoading: boolean;
+  isAuthenticated: boolean;
+  isSessionExpired: boolean;
+  /** Access ladder tier derived from the current user (see lib/access). */
+  accessTier: AccessTier;
+  login: (payload: LoginRequest) => Promise<void>;
+  register: (payload: RegisterRequest) => Promise<void>;
+  logout: () => void;
+  switchRole: (role: UserRole) => void;
+  /**
+   * Mark the company onboarding as completed for the signed-in user.
+   * When the onboarding save returns the company's id, bind the session
+   * to that company so later requests resolve to its own workspace.
+   */
+  completeOnboarding: (companyId?: string) => void;
+  simulateSessionExpiry: () => void;
+  clearSessionExpiry: () => void;
+  setSession: (session: AuthSession | null) => void;
+}
+
+const STORAGE_SESSION_KEY = "smp_auth_session";
+
+// Reference copy of the seeded demo client account. Sessions are never
+// created from it automatically — a visitor starts as a guest and signs
+// in explicitly; it only remains as the target persona for switchRole.
+const DEFAULT_INITIAL_SESSION: AuthSession = {
+  user: {
+    id: "usr_owner_01",
+    email: "sarah@lumierecoffee.com",
+    fullName: "Sarah Jenkins",
+    role: "COMPANY_OWNER",
+    emailVerified: true,
+    onboardingCompleted: true,
+    companyId: "cmp_lumiere_01",
+    createdAt: "2026-10-01T09:00:00.000Z",
+  },
+  expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 8).toISOString(),
+  isSimulated: true,
+};
+
+const AuthContext = createContext<AuthContextValue | undefined>(undefined);
+
+export function AuthProvider({ children }: { children: React.ReactNode }) {
+  const [session, setSessionState] = useState<AuthSession | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSessionExpired, setIsSessionExpired] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    try {
+      const stored = window.localStorage.getItem(STORAGE_SESSION_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored) as AuthSession;
+        // Refresh simulated demo sessions automatically so they don't expire overnight
+        if (new Date(parsed.expiresAt).getTime() < Date.now()) {
+          const refreshed: AuthSession = {
+            ...parsed,
+            expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 30).toISOString(),
+          };
+          setSessionState(refreshed);
+          window.localStorage.setItem(
+            STORAGE_SESSION_KEY,
+            JSON.stringify(refreshed)
+          );
+        } else {
+          setSessionState(parsed);
+        }
+        // Mirror a restored live token into the foundation token store.
+        if (parsed.accessToken) saveAccessToken(parsed.accessToken);
+      } else {
+        // No stored session: the visitor is a guest. The workspace
+        // shows its guest dashboard until he signs in — no session is
+        // created on his behalf.
+        setSessionState(null);
+      }
+    } catch {
+      setSessionState(null);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  const saveSession = useCallback((next: AuthSession | null) => {
+    setSessionState(next);
+    try {
+      if (next) {
+        window.localStorage.setItem(STORAGE_SESSION_KEY, JSON.stringify(next));
+        // Keep the foundation's token store (src/lib/auth-storage.ts)
+        // in sync: the shared api-client reads the bearer token from
+        // there in live mode.
+        if (next.accessToken) saveAccessToken(next.accessToken);
+      } else {
+        window.localStorage.removeItem(STORAGE_SESSION_KEY);
+        clearAccessToken();
+      }
+    } catch {
+      // Ignore storage errors
+    }
+  }, []);
+
+  const login = useCallback(
+    async (payload: LoginRequest) => {
+      const res = await authApi.login(payload);
+      saveSession(res.data);
+      setIsSessionExpired(false);
+    },
+    [saveSession]
+  );
+
+  const register = useCallback(
+    async (payload: RegisterRequest) => {
+      const res = await authApi.register(payload);
+      saveSession(res.data);
+      setIsSessionExpired(false);
+    },
+    [saveSession]
+  );
+
+  const logout = useCallback(() => {
+    saveSession(null);
+    setIsSessionExpired(false);
+    router.push("/login");
+  }, [saveSession, router]);
+
+  const switchRole = useCallback(
+    (role: UserRole) => {
+      if (!session) return;
+      const updated: AuthSession = {
+        ...session,
+        user: {
+          ...session.user,
+          role,
+          // The platform admin belongs to no company; the client
+          // account belongs to its own company only.
+          companyId:
+            role === "SYSTEM_ADMIN"
+              ? undefined
+              : DEFAULT_INITIAL_SESSION.user.companyId,
+          email:
+            role === "SYSTEM_ADMIN"
+              ? "admin@smartmarketing.ai"
+              : "sarah@lumierecoffee.com",
+          fullName:
+            role === "SYSTEM_ADMIN"
+              ? "Kemal Arslan"
+              : "Sarah Jenkins",
+        },
+      };
+      saveSession(updated);
+      router.push("/dashboard");
+    },
+    [session, saveSession, router]
+  );
+
+  const completeOnboarding = useCallback(
+    (companyId?: string) => {
+      if (!session) return;
+      saveSession({
+        ...session,
+        user: {
+          ...session.user,
+          onboardingCompleted: true,
+          ...(typeof companyId === "string" && companyId.length > 0
+            ? { companyId }
+            : {}),
+        },
+      });
+    },
+    [session, saveSession]
+  );
+
+  const simulateSessionExpiry = useCallback(() => {
+    setIsSessionExpired(true);
+    saveSession(null);
+  }, [saveSession]);
+
+  const clearSessionExpiry = useCallback(() => {
+    setIsSessionExpired(false);
+  }, []);
+
+  // Memoized for the same reason as I18nProvider: an inline object
+  // here re-rendered every useAuth() consumer on every provider render.
+  const value = useMemo<AuthContextValue>(
+    () => ({
+      session,
+      user: session ? session.user : null,
+      isLoading,
+      isAuthenticated: !!session && !isSessionExpired,
+      isSessionExpired,
+      accessTier: tierForUser(session ? session.user : null),
+      login,
+      register,
+      logout,
+      switchRole,
+      completeOnboarding,
+      simulateSessionExpiry,
+      clearSessionExpiry,
+      setSession: saveSession,
+    }),
+    [
+      session,
+      isLoading,
+      isSessionExpired,
+      login,
+      register,
+      logout,
+      switchRole,
+      completeOnboarding,
+      simulateSessionExpiry,
+      clearSessionExpiry,
+      saveSession,
+    ]
+  );
+
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+export function useAuth() {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
+  }
+  return context;
+}
