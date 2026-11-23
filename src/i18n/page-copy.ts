@@ -19,8 +19,8 @@ export const LANDING_COPY = {
     ],
     heroSubhead:
       "Turn your product catalog and brand voice into approved Instagram Professional and Facebook Page campaigns, scheduled publications, and evidence-based SWOT intelligence in one workspace.",
-    tryStudioBtn: "Launch AI Content Studio",
-    exploreDashboardBtn: "Explore Marketing Command",
+    tryStudioBtn: "Try the Content Studio",
+    exploreDashboardBtn: "Open the dashboard",
     liveFrameTitle: "Interactive Studio Preview — Select a business to test live creation",
     approvePreviewBtn: "Approved for Meta Schedule",
     diagramHeading: "One brand input drives three parallel marketing lanes.",
@@ -62,8 +62,8 @@ export const LANDING_COPY = {
     ],
     heroSubhead:
       "Ürün kataloğunuzu ve marka sesinizi tek bir çalışma alanında onaylı Instagram Profesyonel ve Facebook Sayfası kampanyalarına, yayın takvimine ve kanıta dayalı SWOT analizlerine dönüştürün.",
-    tryStudioBtn: "YZ İçerik Stüdyosunu Aç",
-    exploreDashboardBtn: "Pazarlama Merkezini Keşfet",
+    tryStudioBtn: "İçerik Stüdyosunu aç",
+    exploreDashboardBtn: "Paneli aç",
     liveFrameTitle: "Canlı Stüdyo Önizlemesi — Canlı üretimi denemek için bir işletme seçin",
     approvePreviewBtn: "Meta Takvimi İçin Onaylandı",
     diagramHeading: "Tek bir marka girdisi üç paralel pazarlama hattını besler.",
@@ -104,8 +104,8 @@ export const LANDING_COPY = {
     ],
     heroSubhead:
       "حوّل كتالوج منتجاتك ونبرة علامتك التجارية إلى حملات معتمدة على إنستغرام الاحترافي وصفحات فيسبوك، وجدولة نشر تلقائية، وتقارير SWOT مبنية على البيانات في مساحة عمل واحدة.",
-    tryStudioBtn: "تشغيل استوديو الذكاء الاصطناعي",
-    exploreDashboardBtn: "استكشاف مركز القيادة",
+    tryStudioBtn: "جرّب استوديو المحتوى",
+    exploreDashboardBtn: "افتح لوحة التحكم",
     liveFrameTitle: "معاينة حية للاستوديو — اختر نشاطاً تجارياً لتجربة التوليد الفوري",
     approvePreviewBtn: "معتمد لجدولة النشر",
     diagramHeading: "مدخل واحد للعلامة التجارية يغذي ثلاثة مسارات تسويقية متوازية.",

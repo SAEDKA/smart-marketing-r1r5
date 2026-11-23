@@ -32,7 +32,7 @@ export function SiteNavbar() {
       <Link href="/" className="group flex items-center gap-3">
         <BrandLogo
           priority
-          className="h-10 w-10 shadow-glow-violet transition-transform group-hover:scale-105"
+          className="h-10 w-10"
         />
         <span className="hidden min-[480px]:block">
           <span className="block text-sm font-bold tracking-tight text-white">

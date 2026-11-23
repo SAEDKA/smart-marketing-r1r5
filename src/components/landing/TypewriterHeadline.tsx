@@ -14,7 +14,7 @@ const TYPE_MS = 28;
  *
  * The headline is defined as segments so the brand words (the
  * "AI" / "marketing" equivalents in each locale) can carry the
- * emerald-to-cyan gradient — including mid-typing, because the
+ * solid brand accent — including mid-typing, because the
  * reveal slices each segment's text rather than the joined string.
  *
  * Layout never jumps: an invisible full copy of the headline
@@ -99,14 +99,7 @@ export function TypewriterHeadline({
           const text = segment.text.slice(0, take);
           if (!segment.accent) return <span key={index}>{text}</span>;
           return (
-            <span
-              key={index}
-              className="bg-clip-text text-transparent"
-              style={{
-                backgroundImage:
-                  "linear-gradient(92deg, var(--accent-mint), var(--accent-cyan))",
-              }}
-            >
+            <span key={index} className="text-accent-mint">
               {text}
             </span>
           );

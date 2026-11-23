@@ -31,7 +31,7 @@ const BUSINESS_PRESETS = [
     id: "lumiere",
     brand: "Lumiere Artisan Roasters",
     category: "Specialty Coffee & Bakery",
-    tone: "LUXURY",
+    tone: "Luxury",
     productName: "Ethiopia Yirgacheffe G1 Washed",
     price: "$24.50",
     caption:
@@ -47,7 +47,7 @@ const BUSINESS_PRESETS = [
     id: "vela",
     brand: "Vela Botanical Lab",
     category: "Clean Clinical Skincare",
-    tone: "EDUCATIONAL",
+    tone: "Educational",
     productName: "Bakuchiol + Rosehip Barrier Serum",
     price: "$38.00",
     caption:
@@ -63,7 +63,7 @@ const BUSINESS_PRESETS = [
     id: "kaya",
     brand: "Kaya Ceramic Studio",
     category: "Handcrafted Tableware",
-    tone: "FRIENDLY",
+    tone: "Friendly",
     productName: "Raw Stoneware Pour-Over Set",
     price: "$64.00",
     caption:
@@ -92,7 +92,7 @@ export default function LandingPage() {
   const handleSpotlightMove = useSpotlight();
 
   return (
-    <div className="min-h-screen flex flex-col bg-navy-950 text-white relative overflow-x-hidden">
+    <div className="landing-calm min-h-screen flex flex-col bg-navy-950 text-white relative overflow-x-hidden">
       {/* Top Navigation Header — the shared SiteNavbar (foundation component) */}
       <header className="sticky top-0 z-40 glass-panel border-b border-white/10 px-4 py-4 sm:px-8">
         <SiteNavbar />
@@ -110,12 +110,12 @@ export default function LandingPage() {
             <div className="lg:col-span-5 space-y-6">
               <TypewriterHeadline
                 segments={copy.heroHeadline}
-                className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.08]"
+                className="text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-white leading-[1.08]"
                 onDone={() => setHeroTyped(true)}
               />
 
               <p
-                className={`text-sm sm:text-base text-accent-mint leading-relaxed transition-all duration-700 ${
+                className={`text-sm sm:text-base text-txt-secondary leading-relaxed transition-all duration-700 ${
                   heroTyped
                     ? "translate-y-0 opacity-100"
                     : "translate-y-3 opacity-0"
@@ -637,10 +637,10 @@ export default function LandingPage() {
           </p>
           <div className="flex items-center gap-5">
             <Link href="/dashboard" className="hover:text-white transition-colors">
-              Marketing Command
+              Dashboard
             </Link>
             <Link href="/content-studio" className="hover:text-white transition-colors">
-              AI Studio
+              Content Studio
             </Link>
           </div>
         </div>
