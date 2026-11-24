@@ -339,6 +339,10 @@ export interface Dictionary {
     languageSelect: string;
     toneSelect: string;
     customPromptLabel: string;
+    step1Title: string;
+    step2Title: string;
+    step3Title: string;
+    advancedOptions: string;
     generateBtn: string;
     generatingBtn: string;
     idleStateTitle: string;

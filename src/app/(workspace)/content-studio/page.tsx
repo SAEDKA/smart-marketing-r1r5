@@ -54,6 +54,17 @@ import {
 
 type DevicePreviewFormat = "FEED" | "STORY" | "CAROUSEL";
 
+function StepTitle({ n, children }: { n: number; children: React.ReactNode }) {
+  return (
+    <div className="flex items-center gap-2.5 pt-1">
+      <span className="w-6 h-6 rounded-full bg-accent-violet text-white text-[11px] font-bold flex items-center justify-center shrink-0">
+        {n}
+      </span>
+      <h3 className="text-xs font-bold text-white">{children}</h3>
+    </div>
+  );
+}
+
 export default function ContentStudioPage() {
   const { t } = useI18n();
   const searchParams = useSearchParams();
@@ -73,7 +84,7 @@ export default function ContentStudioPage() {
   const [selectedTone, setSelectedTone] =
     useState<CommunicationTone>("LUXURY");
   const [customPrompt, setCustomPrompt] = useState("");
-  const [productSectionOpen, setProductSectionOpen] = useState(false);
+  const [advancedOpen, setAdvancedOpen] = useState(false);
 
   // Generation status (WEB-02-05: honest job states: idle, queued, processing, completed, failed)
   const [generationState, setGenerationState] = useState<
@@ -308,6 +319,9 @@ export default function ContentStudioPage() {
             </Badge>
           </div>
 
+          {/* Step 1: the idea — describe the ad, add a photo if you have one */}
+          <StepTitle n={1}>{t.studio.step1Title}</StepTitle>
+
           {/* The idea comes first: describe the ad in your own words */}
           <Textarea
             label={t.studio.customPromptLabel}
@@ -387,74 +401,8 @@ export default function ContentStudioPage() {
             )}
           </div>
 
-          {/* Campaign Context Selector */}
-          <div className="space-y-1.5">
-            <label className="block text-xs font-medium text-txt-secondary">
-              {t.studio.campaignContext}
-            </label>
-            <select
-              value={selectedCampaignId}
-              onChange={(e) => setSelectedCampaignId(e.target.value)}
-              disabled={campaigns.length === 0}
-              className="field-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
-            >
-              {campaigns.length === 0 && (
-                <option value="">{t.studio.noCampaignsYet}</option>
-              )}
-              {campaigns.map((camp) => (
-                <option key={camp.id} value={camp.id}>
-                  {camp.name} — {objectiveLabel(camp.objective)}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Optional Product Context: collapsed by default, the ad works without it */}
-          <div className="rounded-xl border border-white/10 bg-white/[0.03]">
-            <button
-              type="button"
-              onClick={() => setProductSectionOpen((open) => !open)}
-              aria-expanded={productSectionOpen}
-              className="w-full flex items-center gap-2 px-3.5 py-3 text-start"
-            >
-              <Package className="w-4 h-4 text-accent-cyan shrink-0" />
-              <span className="text-xs font-medium text-txt-secondary">
-                {t.studio.productContext}
-              </span>
-              <Badge variant="cyan" size="sm">
-                {t.studio.productOptionalBadge}
-              </Badge>
-              {activeProduct && !productSectionOpen && (
-                <span className="text-[11px] text-accent-mint truncate">
-                  {activeProduct.name}
-                </span>
-              )}
-              <ChevronDown
-                className={`w-4 h-4 text-txt-muted ms-auto shrink-0 transition-transform ${
-                  productSectionOpen ? "rotate-180" : ""
-                }`}
-              />
-            </button>
-            {productSectionOpen && (
-              <div className="px-3.5 pb-3.5 space-y-2">
-                <select
-                  value={selectedProductId}
-                  onChange={(e) => setSelectedProductId(e.target.value)}
-                  className="field-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
-                >
-                  <option value="">{t.studio.noProductOption}</option>
-                  {products.map((prod) => (
-                    <option key={prod.id} value={prod.id}>
-                      {prod.name} (${prod.price.toFixed(2)})
-                    </option>
-                  ))}
-                </select>
-                <p className="text-[11px] leading-relaxed text-txt-muted">
-                  {t.studio.productOptionalHint}
-                </p>
-              </div>
-            )}
-          </div>
+          {/* Step 2: where the ad will be published */}
+          <StepTitle n={2}>{t.studio.step2Title}</StepTitle>
 
           {/* Platform Selector (Instagram & Facebook MVP) */}
           <div className="space-y-1.5">
@@ -490,48 +438,122 @@ export default function ContentStudioPage() {
             </div>
           </div>
 
-          {/* Tone & Language Selectors */}
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="block text-xs font-medium text-txt-secondary mb-1.5">
-                {t.studio.toneSelect}
+          {/* Additional options: useful, but folded away so the first steps stay simple */}
+          <div className="rounded-xl border border-white/10 bg-white/[0.03]">
+            <button
+              type="button"
+              onClick={() => setAdvancedOpen((open) => !open)}
+              aria-expanded={advancedOpen}
+              className="w-full flex items-center gap-2 px-3.5 py-3 text-start"
+            >
+              <Sliders className="w-4 h-4 text-accent-cyan shrink-0" />
+              <span className="text-xs font-medium text-txt-secondary">
+                {t.studio.advancedOptions}
+              </span>
+              <ChevronDown
+                className={`w-4 h-4 text-txt-muted ms-auto shrink-0 transition-transform ${
+                  advancedOpen ? "rotate-180" : ""
+                }`}
+              />
+            </button>
+            {advancedOpen && (
+              <div className="px-3.5 pb-3.5 space-y-4">
+            {/* Campaign Context Selector */}
+            <div className="space-y-1.5">
+              <label className="block text-xs font-medium text-txt-secondary">
+                {t.studio.campaignContext}
               </label>
               <select
-                value={selectedTone}
-                onChange={(e) =>
-                  setSelectedTone(e.target.value as CommunicationTone)
-                }
-                className="field-input w-full h-10 px-3 text-xs text-white bg-navy-900 focus:outline-none"
+                value={selectedCampaignId}
+                onChange={(e) => setSelectedCampaignId(e.target.value)}
+                disabled={campaigns.length === 0}
+                className="field-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
               >
-                <option value="LUXURY">{t.onboarding.tones.LUXURY}</option>
-                <option value="PROFESSIONAL">
-                  {t.onboarding.tones.PROFESSIONAL}
-                </option>
-                <option value="FRIENDLY">{t.onboarding.tones.FRIENDLY}</option>
-                <option value="BOLD">{t.onboarding.tones.BOLD}</option>
-                <option value="EDUCATIONAL">
-                  {t.onboarding.tones.EDUCATIONAL}
-                </option>
+                {campaigns.length === 0 && (
+                  <option value="">{t.studio.noCampaignsYet}</option>
+                )}
+                {campaigns.map((camp) => (
+                  <option key={camp.id} value={camp.id}>
+                    {camp.name} — {objectiveLabel(camp.objective)}
+                  </option>
+                ))}
               </select>
             </div>
 
-            <div>
-              <label className="block text-xs font-medium text-txt-secondary mb-1.5">
-                {t.studio.languageSelect}
-              </label>
+            <div className="space-y-1.5">
+              <div className="flex items-center gap-2">
+                <label className="block text-xs font-medium text-txt-secondary">
+                  {t.studio.productContext}
+                </label>
+                <Badge variant="cyan" size="sm">
+                  {t.studio.productOptionalBadge}
+                </Badge>
+              </div>
               <select
-                value={selectedLanguage}
-                onChange={(e) =>
-                  setSelectedLanguage(e.target.value as ContentLanguage)
-                }
-                className="field-input w-full h-10 px-3 text-xs text-white bg-navy-900 focus:outline-none"
+                value={selectedProductId}
+                onChange={(e) => setSelectedProductId(e.target.value)}
+                className="field-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
               >
-                <option value="en">English (en)</option>
-                <option value="tr">Türkçe (tr)</option>
-                <option value="ar">العربية (ar)</option>
+                <option value="">{t.studio.noProductOption}</option>
+                {products.map((prod) => (
+                  <option key={prod.id} value={prod.id}>
+                    {prod.name} (${prod.price.toFixed(2)})
+                  </option>
+                ))}
               </select>
+              <p className="text-[11px] leading-relaxed text-txt-muted">
+                {t.studio.productOptionalHint}
+              </p>
             </div>
+
+            {/* Tone & Language Selectors */}
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="block text-xs font-medium text-txt-secondary mb-1.5">
+                  {t.studio.toneSelect}
+                </label>
+                <select
+                  value={selectedTone}
+                  onChange={(e) =>
+                    setSelectedTone(e.target.value as CommunicationTone)
+                  }
+                  className="field-input w-full h-10 px-3 text-xs text-white bg-navy-900 focus:outline-none"
+                >
+                  <option value="LUXURY">{t.onboarding.tones.LUXURY}</option>
+                  <option value="PROFESSIONAL">
+                    {t.onboarding.tones.PROFESSIONAL}
+                  </option>
+                  <option value="FRIENDLY">{t.onboarding.tones.FRIENDLY}</option>
+                  <option value="BOLD">{t.onboarding.tones.BOLD}</option>
+                  <option value="EDUCATIONAL">
+                    {t.onboarding.tones.EDUCATIONAL}
+                  </option>
+                </select>
+              </div>
+
+              <div>
+                <label className="block text-xs font-medium text-txt-secondary mb-1.5">
+                  {t.studio.languageSelect}
+                </label>
+                <select
+                  value={selectedLanguage}
+                  onChange={(e) =>
+                    setSelectedLanguage(e.target.value as ContentLanguage)
+                  }
+                  className="field-input w-full h-10 px-3 text-xs text-white bg-navy-900 focus:outline-none"
+                >
+                  <option value="en">English (en)</option>
+                  <option value="tr">Türkçe (tr)</option>
+                  <option value="ar">العربية (ar)</option>
+                </select>
+              </div>
+            </div>
+              </div>
+            )}
           </div>
+
+          {/* Step 3: one big generate button */}
+          <StepTitle n={3}>{t.studio.step3Title}</StepTitle>
 
           {/* Generate Button */}
           <Button
