@@ -20,6 +20,106 @@ import {
 } from "lucide-react";
 import { formatDate } from "@/lib/utils";
 
+/**
+ * A question answered by tapping ready-made options instead of writing
+ * prose — the way Predis-style onboarding does it. "Other" opens a
+ * free-text box for anything the options miss. The stored value stays a
+ * plain string: the chosen options joined together, plus the free text
+ * when present, so saving and syncing work exactly as before.
+ */
+function ChoiceField({
+  label,
+  options,
+  value,
+  onChange,
+  multi = false,
+  otherLabel,
+  otherPlaceholder,
+  locale,
+}: {
+  label: string;
+  options: string[];
+  value: string;
+  onChange: (next: string) => void;
+  multi?: boolean;
+  otherLabel: string;
+  otherPlaceholder: string;
+  locale: string;
+}) {
+  const sep = locale === "ar" ? "، " : ", ";
+  const parts = value ? value.split(/[,،]\s*/).filter(Boolean) : [];
+  const selected = options.filter((o) => parts.includes(o));
+  const otherText = parts.filter((pt) => !options.includes(pt)).join(sep);
+  const [otherOpen, setOtherOpen] = useState(false);
+  const showOther = otherOpen || otherText.length > 0;
+
+  const compose = (sel: string[], other: string) =>
+    [...sel, ...(other.trim() ? [other.trim()] : [])].join(sep);
+
+  const toggle = (opt: string) => {
+    if (!multi) {
+      onChange(
+        selected.includes(opt)
+          ? compose([], otherText)
+          : compose([opt], otherText)
+      );
+      return;
+    }
+    const next = selected.includes(opt)
+      ? selected.filter((o) => o !== opt)
+      : [...selected, opt];
+    onChange(compose(next, otherText));
+  };
+
+  return (
+    <div className="space-y-2">
+      <span className="block text-xs font-medium text-txt-secondary">
+        {label}
+      </span>
+      <div className="flex flex-wrap gap-2">
+        {options.map((opt) => {
+          const isActive = selected.includes(opt);
+          return (
+            <button
+              key={opt}
+              type="button"
+              onClick={() => toggle(opt)}
+              aria-pressed={isActive}
+              className={`px-3 py-1.5 rounded-full border text-xs transition-all ${
+                isActive
+                  ? "bg-accent-violet/20 border-accent-violet text-white font-semibold"
+                  : "bg-white/5 border-white/10 text-txt-secondary hover:text-white"
+              }`}
+            >
+              {opt}
+            </button>
+          );
+        })}
+        <button
+          type="button"
+          onClick={() => setOtherOpen((open) => !open)}
+          aria-pressed={showOther}
+          className={`px-3 py-1.5 rounded-full border border-dashed text-xs transition-all ${
+            showOther
+              ? "bg-accent-violet/10 border-accent-violet text-white font-semibold"
+              : "border-white/20 text-txt-secondary hover:text-white"
+          }`}
+        >
+          {otherLabel}
+        </button>
+      </div>
+      {showOther && (
+        <Textarea
+          value={otherText}
+          onChange={(e) => onChange(compose(selected, e.target.value))}
+          placeholder={otherPlaceholder}
+          rows={2}
+        />
+      )}
+    </div>
+  );
+}
+
 export default function BrandSettingsPage() {
   const { t, locale } = useI18n();
 
@@ -131,6 +231,7 @@ export default function BrandSettingsPage() {
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
             {t.brand.title}
           </h1>
+          {/* Brand settings sync with /api/v1/company/brand (WEB-01-07) — traceability lives in code, not on the user's screen */}
           <p className="text-sm text-txt-secondary mt-1">{t.brand.subtitle}</p>
         </div>
 
@@ -182,7 +283,7 @@ export default function BrandSettingsPage() {
             <div className="flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-accent-violet" />
               <h2 className="text-base font-semibold text-white">
-                Core Identity & Voice
+                {t.brand.identityTitle}
               </h2>
             </div>
             {hasUnsavedChanges && (
@@ -220,12 +321,14 @@ export default function BrandSettingsPage() {
             </div>
           </div>
 
-          <Textarea
+          <ChoiceField
             label={t.brand.brandDescription}
+            options={t.brand.descriptionOptions}
             value={brandDescription}
-            onChange={(e) => setBrandDescription(e.target.value)}
-            rows={3}
-            required
+            onChange={setBrandDescription}
+            otherLabel={t.brand.otherLabel}
+            otherPlaceholder={t.brand.otherPlaceholder}
+            locale={locale}
           />
 
           <div className="space-y-2">
@@ -257,27 +360,43 @@ export default function BrandSettingsPage() {
 
           <div className="border-t border-white/10 pt-6 space-y-4">
             <h3 className="text-sm font-semibold text-accent-cyan">
-              Target Audience & Positioning
+              {t.brand.audienceTitle}
             </h3>
+            <p className="text-[11px] leading-relaxed text-txt-muted">
+              {t.brand.optionalNote}
+            </p>
 
-            <Textarea
+            <ChoiceField
               label={t.brand.targetAudienceSummary}
+              options={t.brand.audienceOptions}
               value={targetAudienceSummary}
-              onChange={(e) => setTargetAudienceSummary(e.target.value)}
-              rows={2}
+              onChange={setTargetAudienceSummary}
+              multi
+              otherLabel={t.brand.otherLabel}
+              otherPlaceholder={t.brand.otherPlaceholder}
+              locale={locale}
             />
 
-            <Input
+            <ChoiceField
               label={t.brand.keyValueProposition}
+              options={t.brand.valueOptions}
               value={keyValueProposition}
-              onChange={(e) => setKeyValueProposition(e.target.value)}
+              onChange={setKeyValueProposition}
+              multi
+              otherLabel={t.brand.otherLabel}
+              otherPlaceholder={t.brand.otherPlaceholder}
+              locale={locale}
             />
 
-            <Textarea
+            <ChoiceField
               label={t.brand.brandGuidelines}
+              options={t.brand.guidelinesOptions}
               value={brandGuidelines}
-              onChange={(e) => setBrandGuidelines(e.target.value)}
-              rows={3}
+              onChange={setBrandGuidelines}
+              multi
+              otherLabel={t.brand.otherLabel}
+              otherPlaceholder={t.brand.otherPlaceholder}
+              locale={locale}
             />
           </div>
 

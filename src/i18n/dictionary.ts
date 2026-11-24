@@ -192,6 +192,15 @@ export interface Dictionary {
     syncBadge: string;
     discardConfirm: string;
     reloadFromServer: string;
+    identityTitle: string;
+    audienceTitle: string;
+    optionalNote: string;
+    otherLabel: string;
+    otherPlaceholder: string;
+    descriptionOptions: string[];
+    audienceOptions: string[];
+    valueOptions: string[];
+    guidelinesOptions: string[];
   };
   dashboard: {
     welcomePrefix: string;
