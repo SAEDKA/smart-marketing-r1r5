@@ -53,7 +53,7 @@ export default function VerifyEmailPage() {
 
   return (
     <div className="w-full max-w-md animate-in fade-in zoom-in-95 duration-300">
-      <Card className="glass-panel border-white/15 shadow-2xl p-6 sm:p-8 text-center">
+      <Card className="surface-panel border-white/15 shadow-2xl p-6 sm:p-8 text-center">
         {state === "idle" && (
           <>
             <CardHeader className="pb-4">

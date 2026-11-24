@@ -2,7 +2,7 @@ import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 /**
- * The Smart Marketing brand mark — a glass speech bubble with a rising
+ * The Smart Marketing brand mark — a speech bubble with a rising
  * growth arrow and an AI spark. Artwork: /public/brand/logo-icon.webp
  * (the browser-tab icon in src/app/icon.png is the same artwork).
  * It carries its own navy tile, so it drops into any header/sidebar

@@ -5,7 +5,6 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useI18n } from "@/lib/i18n/context";
 import { useAuth } from "@/lib/auth/context";
-import { useSpotlight } from "@/lib/hooks/use-spotlight";
 import { TypewriterHeadline } from "@/components/landing/TypewriterHeadline";
 import { Button } from "@/components/ui/Button";
 import { Badge } from "@/components/ui/Badge";
@@ -89,12 +88,10 @@ export default function LandingPage() {
   const [activeMomentStage, setActiveMomentStage] = useState<0 | 1 | 2>(1);
   const preset = BUSINESS_PRESETS[selectedPresetIdx];
 
-  const handleSpotlightMove = useSpotlight();
-
   return (
-    <div className="landing-calm min-h-screen flex flex-col bg-navy-950 text-white relative overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-navy-950 text-white relative overflow-x-hidden">
       {/* Top Navigation Header — the shared SiteNavbar (foundation component) */}
-      <header className="sticky top-0 z-40 glass-panel border-b border-white/10 px-3 py-4 sm:px-8">
+      <header className="sticky top-0 z-40 surface-panel border-b border-white/10 px-3 py-4 sm:px-8">
         <SiteNavbar />
       </header>
 
@@ -149,8 +146,8 @@ export default function LandingPage() {
             {/* Live Interactive App-Frame (7 cols — Shows real product UI working on real data) */}
             <div className="lg:col-span-7">
               <div
-                onMouseMove={handleSpotlightMove}
-                className="rounded-[26px] glass-panel glass-spotlight p-5 sm:p-6 border border-white/15 shadow-2xl space-y-5"
+               
+                className="rounded-[26px] surface-panel p-5 sm:p-6 border border-white/15 shadow-2xl space-y-5"
               >
                 {/* App Frame Top Bar + Preset Selector */}
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/10 relative z-10">
@@ -171,7 +168,7 @@ export default function LandingPage() {
                         onClick={() => setSelectedPresetIdx(idx)}
                         className={`px-3 py-1 rounded-full text-xs font-semibold transition-all ${
                           selectedPresetIdx === idx
-                            ? "bg-accent-violet text-navy-950 shadow-glow-violet"
+                            ? "bg-accent-violet text-navy-950"
                             : "bg-white/5 text-txt-secondary hover:text-white border border-white/10"
                         }`}
                       >
@@ -299,12 +296,12 @@ export default function LandingPage() {
           </div>
 
           <div
-            onMouseMove={handleSpotlightMove}
-            className="rounded-[26px] glass-panel glass-spotlight p-6 sm:p-10 border border-white/15"
+           
+            className="rounded-[26px] surface-panel p-6 sm:p-10 border border-white/15"
           >
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center relative z-10">
               {/* 1. Input Node (3 cols) */}
-              <div className="lg:col-span-3 glass-card p-5 space-y-3">
+              <div className="lg:col-span-3 surface-card p-5 space-y-3">
                 <div className="flex items-center gap-3">
                   <div className="w-10 h-10 rounded-xl bg-accent-violet/15 border border-accent-violet/30 flex items-center justify-center text-accent-violet">
                     <Sliders className="w-5 h-5" />
@@ -343,9 +340,9 @@ export default function LandingPage() {
               </div>
 
               {/* 2. Main Processor Hub (3 cols) */}
-              <div className="lg:col-span-3 glass-card p-6 border-accent-violet/40 space-y-3">
+              <div className="lg:col-span-3 surface-card p-6 border-accent-violet/40 space-y-3">
                 <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-accent-violet to-accent-cyan flex items-center justify-center text-navy-950 shadow-glow-violet">
+                  <div className="w-11 h-11 rounded-2xl bg-accent-violet flex items-center justify-center text-navy-950">
                     <Sparkles className="w-5 h-5" />
                   </div>
                   <div>
@@ -401,7 +398,7 @@ export default function LandingPage() {
               <div className="lg:col-span-4 space-y-3">
                 <Link
                   href="/integrations"
-                  className="glass-card-interactive p-4 flex items-center justify-between gap-3 block"
+                  className="surface-card-interactive p-4 flex items-center justify-between gap-3 block"
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-9 h-9 rounded-xl bg-accent-violet/15 text-accent-violet flex items-center justify-center">
@@ -421,7 +418,7 @@ export default function LandingPage() {
 
                 <Link
                   href="/integrations"
-                  className="glass-card-interactive p-4 flex items-center justify-between gap-3 block"
+                  className="surface-card-interactive p-4 flex items-center justify-between gap-3 block"
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-9 h-9 rounded-xl bg-accent-cyan/15 text-accent-cyan flex items-center justify-center">
@@ -468,7 +465,7 @@ export default function LandingPage() {
                     onClick={() => setActiveMomentStage(idx as 0 | 1 | 2)}
                     className={`px-3.5 py-2 rounded-xl text-xs font-semibold transition-all ${
                       activeMomentStage === idx
-                        ? "bg-accent-violet text-navy-950 shadow-glow-violet"
+                        ? "bg-accent-violet text-navy-950"
                         : "text-txt-secondary hover:text-white"
                     }`}
                   >
@@ -479,7 +476,7 @@ export default function LandingPage() {
             </div>
           </div>
 
-          <div className="rounded-[26px] glass-panel p-6 sm:p-10 border border-white/15">
+          <div className="rounded-[26px] surface-panel p-6 sm:p-10 border border-white/15">
             {activeMomentStage === 0 && (
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 animate-in fade-in duration-200">
                 <div className="space-y-2 border-b md:border-b-0 md:border-e border-white/10 pb-4 md:pb-0 md:pe-6">
@@ -601,7 +598,7 @@ export default function LandingPage() {
 
         {/* CLOSING CTA SECTION */}
         <section className="max-w-7xl mx-auto px-4 sm:px-8 py-16">
-          <div className="rounded-[26px] glass-panel p-8 sm:p-12 border border-white/15 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
+          <div className="rounded-[26px] surface-panel p-8 sm:p-12 border border-white/15 flex flex-col lg:flex-row lg:items-center justify-between gap-8">
             <div className="max-w-2xl space-y-3">
               <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
                 {copy.ctaClosingHeading}

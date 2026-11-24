@@ -6,7 +6,7 @@
  * - "emerald" — the original default (also the `:root` values)
  * - "ocean"   — cyan-leaning dark
  * - "violet"  — purple dark
- * - "light"   — white theme, same Liquid Glass retinted for light surfaces
+ * - "light"   — white theme, same solid design retinted for light surfaces
  */
 export const THEMES = ["dark", "light"] as const;
 

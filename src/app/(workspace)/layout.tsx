@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { useAuth } from "@/lib/auth/context";
-import { GlassSidebar } from "@/components/layout/GlassSidebar";
+import { AppSidebar } from "@/components/layout/AppSidebar";
 import { TopHeader } from "@/components/layout/TopHeader";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { SessionExpiredModal } from "@/components/layout/SessionExpiredModal";
@@ -65,10 +65,10 @@ export default function WorkspaceLayout({
         ready={!isLoading && (isAuthenticated || pathname === "/dashboard")}
       />
       {showShell ? (
-    <div className="workspace-calm min-h-screen flex bg-navy-950 text-white relative overflow-x-hidden">
+    <div className="min-h-screen flex bg-navy-950 text-white relative overflow-x-hidden">
 
-      {/* Desktop Glass Sidebar */}
-      <GlassSidebar />
+      {/* Desktop Sidebar */}
+      <AppSidebar />
 
       {/* Main Content Area */}
       <div className="relative z-10 flex-1 flex flex-col min-w-0 min-h-screen">

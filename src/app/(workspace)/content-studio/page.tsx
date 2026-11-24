@@ -5,7 +5,6 @@ import Link from "next/link";
 import React, { useState, useEffect, useRef } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useI18n } from "@/lib/i18n/context";
-import { useSpotlight } from "@/lib/hooks/use-spotlight";
 import { aiApi } from "@/lib/api/ai.api";
 import { campaignsApi } from "@/lib/api/campaigns.api";
 import { productsApi } from "@/lib/api/products.api";
@@ -128,7 +127,6 @@ export default function ContentStudioPage() {
   const [isSaved, setIsSaved] = useState<boolean>(false);
 
   // Spotlight cursor tracker
-  const handleSpotlightMove = useSpotlight();
 
   // Load campaigns and products on mount
   useEffect(() => {
@@ -297,8 +295,8 @@ export default function ContentStudioPage() {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left Column: AI Configuration Panel (5 cols on Desktop) */}
         <Card
-          onMouseMove={handleSpotlightMove}
-          className="lg:col-span-5 glass-panel glass-spotlight border-white/15 shadow-2xl p-6 space-y-5"
+         
+          className="lg:col-span-5 surface-panel border-white/15 shadow-2xl p-6 space-y-5"
         >
           <div className="flex items-center justify-between border-b border-white/10 pb-3">
             <h2 className="text-sm font-bold text-white flex items-center gap-2">
@@ -398,7 +396,7 @@ export default function ContentStudioPage() {
               value={selectedCampaignId}
               onChange={(e) => setSelectedCampaignId(e.target.value)}
               disabled={campaigns.length === 0}
-              className="glass-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
+              className="field-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
             >
               {campaigns.length === 0 && (
                 <option value="">{t.studio.noCampaignsYet}</option>
@@ -442,7 +440,7 @@ export default function ContentStudioPage() {
                 <select
                   value={selectedProductId}
                   onChange={(e) => setSelectedProductId(e.target.value)}
-                  className="glass-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
+                  className="field-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
                 >
                   <option value="">{t.studio.noProductOption}</option>
                   {products.map((prod) => (
@@ -469,7 +467,7 @@ export default function ContentStudioPage() {
                 onClick={() => setSelectedPlatform("INSTAGRAM")}
                 className={`p-3 rounded-xl border flex items-center justify-center gap-2 text-xs font-semibold transition-all ${
                   selectedPlatform === "INSTAGRAM"
-                    ? "bg-pink-500/20 border-pink-500 text-white shadow-glow-violet"
+                    ? "bg-pink-500/20 border-pink-500 text-white"
                     : "bg-white/5 border-white/10 text-txt-secondary hover:text-white"
                 }`}
               >
@@ -482,7 +480,7 @@ export default function ContentStudioPage() {
                 onClick={() => setSelectedPlatform("FACEBOOK")}
                 className={`p-3 rounded-xl border flex items-center justify-center gap-2 text-xs font-semibold transition-all ${
                   selectedPlatform === "FACEBOOK"
-                    ? "bg-blue-500/20 border-blue-500 text-white shadow-glow-cyan"
+                    ? "bg-blue-500/20 border-blue-500 text-white"
                     : "bg-white/5 border-white/10 text-txt-secondary hover:text-white"
                 }`}
               >
@@ -503,7 +501,7 @@ export default function ContentStudioPage() {
                 onChange={(e) =>
                   setSelectedTone(e.target.value as CommunicationTone)
                 }
-                className="glass-input w-full h-10 px-3 text-xs text-white bg-navy-900 focus:outline-none"
+                className="field-input w-full h-10 px-3 text-xs text-white bg-navy-900 focus:outline-none"
               >
                 <option value="LUXURY">{t.onboarding.tones.LUXURY}</option>
                 <option value="PROFESSIONAL">
@@ -526,7 +524,7 @@ export default function ContentStudioPage() {
                 onChange={(e) =>
                   setSelectedLanguage(e.target.value as ContentLanguage)
                 }
-                className="glass-input w-full h-10 px-3 text-xs text-white bg-navy-900 focus:outline-none"
+                className="field-input w-full h-10 px-3 text-xs text-white bg-navy-900 focus:outline-none"
               >
                 <option value="en">English (en)</option>
                 <option value="tr">Türkçe (tr)</option>
@@ -538,7 +536,7 @@ export default function ContentStudioPage() {
           {/* Generate Button */}
           <Button
             variant="primary"
-            className="w-full h-12 text-sm shadow-glow-violet"
+            className="w-full h-12 text-sm"
             isLoading={
               generationState === "QUEUED" || generationState === "PROCESSING"
             }
@@ -556,8 +554,8 @@ export default function ContentStudioPage() {
           {/* Asynchronous State Feedback: Idle */}
           {generationState === "IDLE" && (
             <Card
-              onMouseMove={handleSpotlightMove}
-              className="glass-spotlight text-center p-10 sm:p-14 space-y-5"
+             
+              className="text-center p-10 sm:p-14 space-y-5"
             >
               <div className="w-16 h-16 rounded-2xl bg-accent-violet/15 text-accent-violet border border-accent-violet/30 flex items-center justify-center mx-auto">
                 <PenLine className="w-8 h-8" />
@@ -624,7 +622,7 @@ export default function ContentStudioPage() {
             <Card className="p-8 space-y-6 border-accent-violet/30">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
-                  <div className="w-11 h-11 rounded-2xl bg-gradient-to-tr from-accent-violet via-accent-indigo to-accent-cyan p-[1px] shadow-glow-violet animate-spin flex items-center justify-center">
+                  <div className="w-11 h-11 rounded-2xl bg-accent-violet p-[1px] animate-spin flex items-center justify-center">
                     <div className="w-full h-full rounded-2xl bg-navy-950 flex items-center justify-center">
                       <Sparkles className="w-5 h-5 text-accent-cyan" />
                     </div>
@@ -741,7 +739,7 @@ export default function ContentStudioPage() {
                       onClick={() => setActiveVariantIndex(idx)}
                       className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
                         activeVariantIndex === idx
-                          ? "bg-accent-violet text-white shadow-glow-violet"
+                          ? "bg-accent-violet text-white"
                           : "bg-white/5 text-txt-secondary hover:text-white"
                       }`}
                     >
@@ -753,8 +751,8 @@ export default function ContentStudioPage() {
 
               {/* Live Platform & Smartphone Device Preview Container */}
               <Card
-                onMouseMove={handleSpotlightMove}
-                className="glass-spotlight p-5 space-y-5"
+               
+                className="p-5 space-y-5"
               >
                 {/* Top Toolbar: Platform Info + Format Mode Switcher (Feed / Story 9:16 / Carousel) */}
                 <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-3">
@@ -819,7 +817,7 @@ export default function ContentStudioPage() {
                   {/* Account Header inside Phone */}
                   <div className="flex items-center justify-between px-2 pt-1">
                     <div className="flex items-center gap-2.5">
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-accent-violet to-accent-cyan flex items-center justify-center text-xs font-bold text-white shadow-glow-violet">
+                      <div className="w-8 h-8 rounded-full bg-accent-violet flex items-center justify-center text-xs font-bold text-white">
                         L
                       </div>
                       <div>

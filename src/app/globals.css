@@ -25,14 +25,7 @@
   --radius-input: 13px;
   --radius-dialog: 24px;
   --radius-surface: 26px;
-  --shadow-glass:
-    0 16px 40px -12px rgba(5, 8, 18, 0.65),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.14);
-  --shadow-glass-hover:
-    0 22px 48px -10px rgb(var(--accent-indigo-rgb) / 0.24),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.24);
   --shadow-glow-violet: 0 0 28px rgb(var(--accent-violet-rgb) / 0.35);
-  --shadow-glow-cyan: 0 0 28px rgb(var(--accent-cyan-rgb) / 0.3);
 }
 
 @layer base {
@@ -101,10 +94,6 @@
 
   body {
     background-color: var(--bg-deep);
-    background-image:
-      radial-gradient(at 12% 8%, color-mix(in srgb, var(--accent-violet) 16%, transparent) 0px, transparent 48%),
-      radial-gradient(at 88% 14%, color-mix(in srgb, var(--accent-cyan) 14%, transparent) 0px, transparent 44%),
-      radial-gradient(at 52% 88%, color-mix(in srgb, var(--accent-indigo) 14%, transparent) 0px, transparent 52%);
     background-attachment: fixed;
     color: var(--txt-primary);
     caret-color: var(--accent-violet);
@@ -135,212 +124,129 @@
     font-feature-settings: "tnum", "ss01";
   }
 
-  .glass-card {
+  /* Surface and control styles: solid raised surfaces, hairline
+     borders and one solid accent. No blur, no gradient fills, no
+     colored glows. */
+  .surface-card {
     position: relative;
-    background: linear-gradient(
-      155deg,
-      color-mix(in srgb, #ffffff 7%, var(--bg-surface)) 0%,
-      color-mix(in srgb, var(--bg-dark) 84%, transparent) 100%
-    );
-    backdrop-filter: blur(24px) saturate(165%);
-    -webkit-backdrop-filter: blur(24px) saturate(165%);
-    border: 1px solid color-mix(in srgb, #ffffff 13%, transparent);
-    box-shadow:
-      0 20px 44px -14px #050812,
-      inset 0 1px 0 0 color-mix(in srgb, #ffffff 18%, transparent);
+    background: var(--bg-surface);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    box-shadow: 0 18px 40px -22px rgb(3 6 10 / 0.6);
     border-radius: 20px;
-    transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: border-color 0.24s ease;
   }
 
-  .glass-card:hover {
-    border-color: color-mix(in srgb, #ffffff 22%, transparent);
+  .surface-card:hover {
+    border-color: rgb(255 255 255 / 0.22);
   }
 
-  .glass-card-interactive {
+  .surface-card-interactive {
     position: relative;
-    background: linear-gradient(
-      155deg,
-      color-mix(in srgb, #ffffff 8%, var(--bg-surface)) 0%,
-      color-mix(in srgb, var(--bg-dark) 86%, transparent) 100%
-    );
-    backdrop-filter: blur(24px) saturate(170%);
-    -webkit-backdrop-filter: blur(24px) saturate(170%);
-    border: 1px solid color-mix(in srgb, #ffffff 14%, transparent);
-    box-shadow:
-      0 20px 44px -14px #050812,
-      inset 0 1px 0 0 color-mix(in srgb, #ffffff 18%, transparent);
+    background: var(--bg-surface);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    box-shadow: 0 18px 40px -22px rgb(3 6 10 / 0.6);
     border-radius: 20px;
-    transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: border-color 0.24s ease;
   }
 
-  .glass-card-interactive:hover {
-    transform: translateY(-2px);
-    border-color: color-mix(in srgb, var(--accent-violet) 52%, transparent);
-    box-shadow:
-      0 24px 52px -12px color-mix(in srgb, var(--accent-indigo) 28%, transparent),
-      inset 0 1px 0 0 color-mix(in srgb, #ffffff 26%, transparent);
+  .surface-card-interactive:hover {
+    border-color: rgb(255 255 255 / 0.22);
   }
 
-  .glass-spotlight {
-    position: relative;
-    overflow: hidden;
+  .surface-panel {
+    background: var(--bg-surface);
+    border: 1px solid rgb(255 255 255 / 0.1);
+    box-shadow: 0 18px 40px -22px rgb(3 6 10 / 0.6);
   }
 
-  .glass-spotlight::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-      480px circle at var(--mouse-x, 50%) var(--mouse-y, 0%),
-      color-mix(in srgb, var(--accent-violet) 16%, transparent),
-      transparent 60%
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .glass-spotlight:hover::before {
-    opacity: 1;
-  }
-
-  .glass-panel {
-    background: linear-gradient(
-      145deg,
-      color-mix(in srgb, #ffffff 9%, var(--bg-surface)) 0%,
-      color-mix(in srgb, var(--bg-dark) 88%, transparent) 100%
-    );
-    backdrop-filter: blur(28px) saturate(175%);
-    -webkit-backdrop-filter: blur(28px) saturate(175%);
-    border: 1px solid color-mix(in srgb, #ffffff 15%, transparent);
-    box-shadow:
-      0 28px 68px -16px #050812,
-      inset 0 1px 0 0 color-mix(in srgb, #ffffff 22%, transparent);
-  }
-
-  .glass-input {
-    background-color: color-mix(in srgb, var(--bg-deep) 80%, transparent);
-    border: 1px solid color-mix(in srgb, #ffffff 15%, transparent);
+  .field-input {
+    background-color: var(--bg-deep);
+    border: 1px solid rgb(255 255 255 / 0.15);
     border-radius: 13px;
     color: #ffffff;
-    box-shadow: inset 0 1px 2px 0 #050812;
-    transition: all 0.2s ease;
+    box-shadow: inset 0 1px 2px 0 rgb(3 6 10 / 0.4);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
   }
 
-  .glass-input:focus {
-    background-color: color-mix(in srgb, var(--bg-dark) 94%, transparent);
+  .field-input:focus {
     border-color: var(--accent-violet);
     box-shadow:
       0 0 0 3px color-mix(in srgb, var(--accent-violet) 26%, transparent),
-      inset 0 1px 0 0 color-mix(in srgb, #ffffff 16%, transparent);
+      inset 0 1px 2px 0 rgb(3 6 10 / 0.4);
   }
 
-  .glass-button-primary {
-    background: linear-gradient(135deg, var(--accent-violet) 0%, var(--accent-indigo) 100%);
+  .btn-primary {
+    background: var(--accent-violet);
     color: #ffffff;
-    border: 1px solid color-mix(in srgb, #ffffff 28%, transparent);
+    border: 1px solid transparent;
     border-radius: 13px;
     font-weight: 600;
-    box-shadow:
-      0 10px 26px -6px color-mix(in srgb, var(--accent-violet) 48%, transparent),
-      inset 0 1px 0 0 color-mix(in srgb, #ffffff 38%, transparent);
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: background-color 0.2s ease;
   }
 
-  .glass-button-primary:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow:
-      0 14px 32px -4px color-mix(in srgb, var(--accent-violet) 64%, transparent),
-      inset 0 1px 0 0 color-mix(in srgb, #ffffff 52%, transparent);
-    filter: brightness(1.07);
+  .btn-primary:hover:not(:disabled) {
+    background: var(--accent-indigo);
   }
 
-  .glass-button-primary:active:not(:disabled) {
-    transform: translateY(0);
-  }
-
-  .glass-button-secondary {
-    background: linear-gradient(
-      180deg,
-      color-mix(in srgb, #ffffff 10%, transparent) 0%,
-      color-mix(in srgb, #ffffff 5%, transparent) 100%
-    );
+  .btn-secondary {
+    background: rgb(255 255 255 / 0.04);
     color: #ffffff;
-    border: 1px solid color-mix(in srgb, #ffffff 15%, transparent);
+    border: 1px solid rgb(255 255 255 / 0.15);
     border-radius: 13px;
     font-weight: 500;
-    backdrop-filter: blur(16px);
-    box-shadow: inset 0 1px 0 0 color-mix(in srgb, #ffffff 14%, transparent);
-    transition: all 0.2s ease;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
   }
 
-  .glass-button-secondary:hover:not(:disabled) {
-    background: linear-gradient(
-      180deg,
-      color-mix(in srgb, #ffffff 15%, transparent) 0%,
-      color-mix(in srgb, #ffffff 8%, transparent) 100%
-    );
-    border-color: color-mix(in srgb, #ffffff 26%, transparent);
-    transform: translateY(-2px);
+  .btn-secondary:hover:not(:disabled) {
+    background: rgb(255 255 255 / 0.08);
+    border-color: rgb(255 255 255 / 0.26);
   }
 
-  .glass-badge {
-    background-color: color-mix(in srgb, #ffffff 7%, transparent);
-    backdrop-filter: blur(12px);
-    border: 1px solid color-mix(in srgb, #ffffff 14%, transparent);
+  .surface-badge {
+    background-color: rgb(255 255 255 / 0.07);
+    border: 1px solid rgb(255 255 255 / 0.14);
     border-radius: 9999px;
   }
 
-  /* Light theme: same Liquid Glass, retinted for white surfaces —
-     frosted glass washed with the brand mint, emerald-tinted shadows,
-     dark-tinted hairlines. */
-  [data-theme="light"] .glass-card,
-  [data-theme="light"] .glass-card-interactive {
-    background: linear-gradient(155deg, #ffffff 0%, #fbfcfc 100%);
+  /* Light theme: the same solid surfaces on white. */
+  [data-theme="light"] .surface-card,
+  [data-theme="light"] .surface-card-interactive,
+  [data-theme="light"] .surface-panel {
+    background: #ffffff;
+    border-color: rgb(19 34 44 / 0.1);
+    box-shadow: 0 18px 40px -24px rgb(19 34 44 / 0.22);
   }
 
-  [data-theme="light"] .glass-panel {
-    background: linear-gradient(145deg, #ffffff 0%, #f8f9f9 100%);
+  [data-theme="light"] .surface-card:hover,
+  [data-theme="light"] .surface-card-interactive:hover {
+    border-color: rgb(19 34 44 / 0.2);
   }
 
-  [data-theme="light"] .glass-card,
-  [data-theme="light"] .glass-card-interactive,
-  [data-theme="light"] .glass-panel {
-    border-color: rgb(19 34 44 / 0.09);
-    box-shadow:
-      0 16px 36px -18px rgb(19 34 44 / 0.14),
-      inset 0 1px 0 0 rgb(255 255 255 / 0.65);
-  }
-
-  [data-theme="light"] .glass-card:hover {
-    border-color: rgb(19 34 44 / 0.18);
-  }
-
-  [data-theme="light"] .glass-card-interactive:hover {
-    border-color: color-mix(in srgb, var(--accent-violet) 45%, transparent);
-    box-shadow:
-      0 20px 44px -16px rgb(19 34 44 / 0.18),
-      inset 0 1px 0 0 rgb(255 255 255 / 0.7);
-  }
-
-  [data-theme="light"] .glass-input {
+  [data-theme="light"] .field-input {
     color: var(--txt-primary);
     border-color: rgb(19 34 44 / 0.14);
     box-shadow: inset 0 1px 2px 0 rgb(19 34 44 / 0.05);
   }
 
-  [data-theme="light"] .glass-input::placeholder {
+  [data-theme="light"] .field-input::placeholder {
     color: var(--txt-muted);
   }
 
-  [data-theme="light"] .glass-button-secondary {
-    color: var(--txt-primary);
-    border-color: rgb(19 34 44 / 0.14);
-    box-shadow: inset 0 1px 0 0 rgb(255 255 255 / 0.55);
+  [data-theme="light"] .btn-primary {
+    background: var(--accent-violet);
   }
 
-  [data-theme="light"] .glass-badge {
+  [data-theme="light"] .btn-primary:hover:not(:disabled) {
+    background: var(--accent-indigo);
+  }
+
+  [data-theme="light"] .btn-secondary {
+    background: rgb(19 34 44 / 0.03);
+    color: var(--txt-primary);
+    border-color: rgb(19 34 44 / 0.14);
+  }
+
+  [data-theme="light"] .surface-badge {
     background-color: rgb(19 34 44 / 0.05);
     border-color: rgb(19 34 44 / 0.1);
   }
@@ -437,9 +343,6 @@
 [data-theme="light"] .ambient-glow {
   display: none;
 }
-[data-theme="light"] .glass-button-primary {
-  background: linear-gradient(135deg, #0a8f66 0%, #07829b 100%);
-}
 [data-theme="light"] .text-white {
   color: var(--txt-primary);
 }
@@ -512,8 +415,8 @@
 [data-theme="light"] .bg-gradient-to-tr.text-white,
 [data-theme="light"] .bg-gradient-to-br.text-white,
 [data-theme="light"] .bg-gradient-to-b.text-white,
-[data-theme="light"] .glass-button-primary.text-white,
-[data-theme="light"] .glass-button-primary .text-white {
+[data-theme="light"] .btn-primary.text-white,
+[data-theme="light"] .btn-primary .text-white {
   color: #ffffff;
 }
 
@@ -677,80 +580,4 @@
 }
 [data-theme="light"] .from-blue-950\/40.via-cyan-950\/20 .text-cyan-300 {
   color: #0b7285;
-}
-
-/* Landing calm pass (unslop) — landing page only.
-   The landing root carries :is(.landing-calm, .workspace-calm); inside it the glass
-   surfaces become solid raised surfaces, the primary button loses
-   its hue gradient and colored shadow, glows and the cursor
-   spotlight are switched off, and the one gradient icon tile goes
-   solid. Workspace and auth screens keep the Liquid Glass system
-   untouched. Remove the :is(.landing-calm, .workspace-calm) class from the landing root
-   to undo the whole pass. */
-:is(.landing-calm, .workspace-calm) .glass-panel,
-:is(.landing-calm, .workspace-calm) .glass-card,
-:is(.landing-calm, .workspace-calm) .glass-card-interactive {
-  background: var(--bg-surface);
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-  border-color: rgb(255 255 255 / 0.1);
-  box-shadow: 0 18px 40px -22px rgb(3 6 10 / 0.6);
-}
-:is(.landing-calm, .workspace-calm) .glass-card-interactive:hover {
-  transform: none;
-  border-color: rgb(255 255 255 / 0.22);
-  box-shadow: 0 18px 40px -22px rgb(3 6 10 / 0.6);
-}
-:is(.landing-calm, .workspace-calm) .glass-spotlight::before {
-  display: none;
-}
-:is(.landing-calm, .workspace-calm) .glass-button-primary {
-  background: var(--accent-violet);
-  border-color: transparent;
-  box-shadow: none;
-}
-:is(.landing-calm, .workspace-calm) .glass-button-primary:hover:not(:disabled) {
-  background: var(--accent-indigo);
-  box-shadow: none;
-  filter: none;
-  transform: none;
-}
-:is(.landing-calm, .workspace-calm) .glass-button-secondary {
-  background: rgb(255 255 255 / 0.04);
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-  box-shadow: none;
-}
-:is(.landing-calm, .workspace-calm) .glass-button-secondary:hover:not(:disabled) {
-  transform: none;
-}
-:is(.landing-calm, .workspace-calm) .shadow-glow-violet,
-:is(.landing-calm, .workspace-calm) .shadow-glow-cyan {
-  box-shadow: none;
-}
-:is(.landing-calm, .workspace-calm) [class*="shadow-glow-"] {
-  box-shadow: none;
-}
-:is(.landing-calm, .workspace-calm) .bg-gradient-to-tr {
-  background-image: none;
-  background-color: var(--accent-violet);
-}
-[data-theme="light"] :is(.landing-calm, .workspace-calm) .glass-panel,
-[data-theme="light"] :is(.landing-calm, .workspace-calm) .glass-card,
-[data-theme="light"] :is(.landing-calm, .workspace-calm) .glass-card-interactive {
-  background: #ffffff;
-  border-color: rgb(19 34 44 / 0.1);
-  box-shadow: 0 18px 40px -24px rgb(19 34 44 / 0.22);
-}
-[data-theme="light"] :is(.landing-calm, .workspace-calm) .glass-card-interactive:hover {
-  border-color: rgb(19 34 44 / 0.2);
-}
-[data-theme="light"] :is(.landing-calm, .workspace-calm) .glass-button-primary {
-  background: var(--accent-violet);
-}
-[data-theme="light"] :is(.landing-calm, .workspace-calm) .glass-button-primary:hover:not(:disabled) {
-  background: var(--accent-indigo);
-}
-[data-theme="light"] :is(.landing-calm, .workspace-calm) .glass-button-secondary {
-  background: rgb(19 34 44 / 0.03);
 }

@@ -462,7 +462,7 @@ export default function IntegrationsPage() {
         </div>
       </div>
 
-      {/* Security Architecture Glass Note */}
+      {/* Security Architecture Note */}
       <div className="p-6 rounded-2xl bg-slate-900/40 border border-white/5 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-violet-500/10 border border-violet-500/20 flex items-center justify-center shrink-0">

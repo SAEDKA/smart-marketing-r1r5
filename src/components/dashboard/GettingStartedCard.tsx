@@ -102,7 +102,7 @@ export function GettingStartedCard() {
   };
 
   return (
-    <section className="glass-card p-5 sm:p-6">
+    <section className="surface-card p-5 sm:p-6">
       <div className="flex items-center justify-between gap-3">
         <h2 className="text-base font-bold text-white">
           {t.access.gettingStartedTitle}
@@ -162,7 +162,7 @@ export function GettingStartedCard() {
             {step.state === "current" && step.ctaHref && (
               <Link
                 href={step.ctaHref}
-                className="glass-button-primary px-3.5 h-9 rounded-[11px] inline-flex items-center text-xs font-semibold text-white shrink-0"
+                className="btn-primary px-3.5 h-9 rounded-[11px] inline-flex items-center text-xs font-semibold text-white shrink-0"
               >
                 {step.ctaLabel}
               </Link>

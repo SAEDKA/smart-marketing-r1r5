@@ -41,7 +41,7 @@ export default function ForgotPasswordPage() {
 
   return (
     <div className="w-full max-w-md animate-in fade-in zoom-in-95 duration-300">
-      <Card className="glass-panel border-white/15 shadow-2xl p-6 sm:p-8">
+      <Card className="surface-panel border-white/15 shadow-2xl p-6 sm:p-8">
         <CardHeader className="text-center pb-6">
           <div className="w-12 h-12 rounded-2xl bg-accent-violet/20 text-accent-violet border border-accent-violet/30 mx-auto mb-3 flex items-center justify-center">
             <Mail className="w-6 h-6" />

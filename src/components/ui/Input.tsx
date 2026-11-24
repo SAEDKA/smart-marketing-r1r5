@@ -52,7 +52,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             aria-invalid={!!error}
             aria-describedby={error ? `${generatedId}-error` : undefined}
             className={cn(
-              "glass-input w-full h-11 px-4 text-sm text-white placeholder:text-txt-muted/70 focus:outline-none transition-all",
+              "field-input w-full h-11 px-4 text-sm text-white placeholder:text-txt-muted/70 focus:outline-none transition-all",
               leftElement && "ps-10",
               rightElement && "pe-10",
               error && "border-semantic-error/80 focus:border-semantic-error focus:ring-semantic-error/20",

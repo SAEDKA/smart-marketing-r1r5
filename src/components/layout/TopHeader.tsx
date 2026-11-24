@@ -89,7 +89,7 @@ export const TopHeader = React.memo(function TopHeader({ onOpenMobileNav }: TopH
   };
 
   return (
-    <header className="h-20 shrink-0 sticky top-0 z-20 glass-panel border-b border-white/10 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+    <header className="h-20 shrink-0 sticky top-0 z-20 surface-panel border-b border-white/10 px-4 sm:px-6 lg:px-8 flex items-center justify-between">
       {/* Left: Mobile hamburger + Current Workspace Section */}
       <div className="flex items-center gap-3">
         <button
@@ -139,7 +139,7 @@ export const TopHeader = React.memo(function TopHeader({ onOpenMobileNav }: TopH
             value={quickQuery}
             onChange={(e) => setQuickQuery(e.target.value)}
             placeholder={t.common.searchPlaceholder}
-            className="glass-input h-9 w-full ps-9 pe-3 text-xs text-white placeholder:text-txt-muted focus:outline-none"
+            className="field-input h-9 w-full ps-9 pe-3 text-xs text-white placeholder:text-txt-muted focus:outline-none"
           />
         </form>
 
@@ -149,7 +149,7 @@ export const TopHeader = React.memo(function TopHeader({ onOpenMobileNav }: TopH
               type="button"
               onClick={() => showAccessNotice(noticeKindForTier(accessTier))}
               title={t.nav.calendar}
-              className="hidden sm:flex items-center justify-center w-9 h-9 rounded-full glass-button-secondary text-txt-secondary opacity-45"
+              className="hidden sm:flex items-center justify-center w-9 h-9 rounded-full btn-secondary text-txt-secondary opacity-45"
             >
               <Calendar className="w-4 h-4" />
             </button>
@@ -157,7 +157,7 @@ export const TopHeader = React.memo(function TopHeader({ onOpenMobileNav }: TopH
             <Link
               href="/calendar"
               title={t.nav.calendar}
-              className="hidden sm:flex items-center justify-center w-9 h-9 rounded-full glass-button-secondary text-txt-secondary hover:text-white transition-colors"
+              className="hidden sm:flex items-center justify-center w-9 h-9 rounded-full btn-secondary text-txt-secondary hover:text-white transition-colors"
             >
               <Calendar className="w-4 h-4" />
             </Link>
@@ -175,13 +175,13 @@ export const TopHeader = React.memo(function TopHeader({ onOpenMobileNav }: TopH
           <div className="flex items-center gap-2">
             <Link
               href="/login"
-              className="hidden sm:inline-flex items-center h-9 px-3.5 rounded-full glass-button-secondary text-xs font-semibold text-white"
+              className="hidden sm:inline-flex items-center h-9 px-3.5 rounded-full btn-secondary text-xs font-semibold text-white"
             >
               {t.access.signInCta}
             </Link>
             <Link
               href="/register"
-              className="inline-flex items-center h-9 px-3.5 rounded-full glass-button-primary text-xs font-semibold text-white"
+              className="inline-flex items-center h-9 px-3.5 rounded-full btn-primary text-xs font-semibold text-white"
             >
               {t.access.registerCta}
             </Link>
@@ -196,7 +196,7 @@ export const TopHeader = React.memo(function TopHeader({ onOpenMobileNav }: TopH
             data-intro-target="account"
             className="flex items-center gap-2.5 p-1 sm:px-2.5 sm:py-1 rounded-full hover:bg-white/10 transition-colors border border-transparent hover:border-white/10"
           >
-            <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-accent-violet via-accent-indigo to-accent-cyan p-[1px] shadow-glow-violet">
+            <div className="w-8 h-8 rounded-full bg-accent-violet p-[1px]">
               <div className="w-full h-full rounded-full bg-navy-950 flex items-center justify-center text-xs font-bold text-white">
                 {user?.fullName?.charAt(0) || "S"}
               </div>
@@ -212,7 +212,7 @@ export const TopHeader = React.memo(function TopHeader({ onOpenMobileNav }: TopH
           </button>
 
           {profileOpen && (
-            <div className="absolute end-0 mt-2 w-64 rounded-2xl glass-panel border border-white/15 p-2 shadow-2xl z-50 animate-in fade-in zoom-in-95">
+            <div className="absolute end-0 mt-2 w-64 rounded-2xl surface-panel border border-white/15 p-2 shadow-2xl z-50 animate-in fade-in zoom-in-95">
               <div className="p-3 border-b border-white/10">
                 <p className="text-xs font-bold text-white truncate">
                   {user?.fullName}

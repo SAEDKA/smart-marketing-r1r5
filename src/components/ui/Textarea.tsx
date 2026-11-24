@@ -41,7 +41,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
           rows={rows}
           aria-invalid={!!error}
           className={cn(
-            "glass-input w-full p-3.5 text-sm text-white placeholder:text-txt-muted/70 focus:outline-none resize-y min-h-[90px]",
+            "field-input w-full p-3.5 text-sm text-white placeholder:text-txt-muted/70 focus:outline-none resize-y min-h-[90px]",
             error && "border-semantic-error/80 focus:border-semantic-error focus:ring-semantic-error/20",
             className
           )}

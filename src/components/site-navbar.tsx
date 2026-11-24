@@ -9,7 +9,7 @@ import { useAuth } from '@/lib/auth/context';
 
 // The shared public navbar (foundation component), upgraded with the
 // product's brand mark, the landing's section anchors and auth-aware
-// calls to action, and restyled to the Liquid Glass theme. It is the
+// calls to action, and restyled to the app theme. It is the
 // header of the public landing page.
 export function SiteNavbar() {
   const messages = useMessages() as unknown as {
@@ -61,11 +61,11 @@ export function SiteNavbar() {
         <ThemeToggle />
         <Link
           href={isAuthenticated ? '/dashboard' : '/login'}
-          className="glass-button-secondary hidden shrink-0 whitespace-nowrap px-4 py-2 text-xs sm:block"
+          className="btn-secondary hidden shrink-0 whitespace-nowrap px-4 py-2 text-xs sm:block"
         >
           {isAuthenticated ? copy.openDashboard : copy.signIn}
         </Link>
-        <Link href="/dashboard" className="glass-button-primary shrink-0 whitespace-nowrap px-3 py-2 text-[11px] min-[420px]:px-4 min-[420px]:text-xs">
+        <Link href="/dashboard" className="btn-primary shrink-0 whitespace-nowrap px-3 py-2 text-[11px] min-[420px]:px-4 min-[420px]:text-xs">
           {copy.openDashboard}
         </Link>
       </div>

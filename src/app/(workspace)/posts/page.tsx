@@ -310,7 +310,7 @@ export default function PostsPage() {
                 onChange={(e) =>
                   setStatusFilter(e.target.value as PostStatus | "ALL")
                 }
-                className="glass-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
+                className="field-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
               >
                 <option value="ALL">{t.posts.filterAll}</option>
                 <option value="PENDING_REVIEW">{t.posts.pendingReview}</option>
@@ -328,7 +328,7 @@ export default function PostsPage() {
                 onChange={(e) =>
                   setPlatformFilter(e.target.value as SocialPlatform | "ALL")
                 }
-                className="glass-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
+                className="field-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
               >
                 <option value="ALL">All Platforms</option>
                 <option value="INSTAGRAM">Instagram</option>
@@ -690,7 +690,7 @@ export default function PostsPage() {
                 key={ver.id}
                 className={`p-4 rounded-2xl border transition-all space-y-2.5 ${
                   isCurrent
-                    ? "bg-accent-violet/15 border-accent-violet shadow-glow-violet/20"
+                    ? "bg-accent-violet/15 border-accent-violet"
                     : "bg-white/5 border-white/10 text-txt-secondary"
                 }`}
               >

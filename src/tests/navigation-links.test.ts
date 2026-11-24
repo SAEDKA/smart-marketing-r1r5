@@ -12,7 +12,7 @@ import path from "path";
  * routing stays client-side and the auth session is never torn down.
  */
 const NAV_FILES = [
-  "src/components/layout/GlassSidebar.tsx",
+  "src/components/layout/AppSidebar.tsx",
   "src/components/layout/MobileNav.tsx",
   "src/components/layout/TopHeader.tsx",
   "src/app/(workspace)/dashboard/page.tsx",

@@ -242,7 +242,7 @@ export const tr: Dictionary = {
         "3 Epik ve 22 Jira Ön Uç Hikayesi üzerinden yapılandırılmış uygulama planı.",
     },
     designSystem: {
-      title: "Liquid Glass Duyarlı Tasarım Sistemi (WEB-01-08)",
+      title: "Solid Duyarlı Tasarım Sistemi (WEB-01-08)",
       subtitle:
         "Renk jetonları, yarı saydam cam yüzeyler, erişilebilir odak durumları, düğmeler, form elemanları, pencereler ve durum rozetlerinin etkileşimli vitrini.",
       colorsTitle: "1. Semantik ve Atmosferik Renk Jetonları",
@@ -250,7 +250,7 @@ export const tr: Dictionary = {
       inputsTitle: "3. Form Kontrolleri, Doğrulama ve Erişilebilir Odak",
       statesTitle: "4. İskelet Yükleyiciler, Boş Durumlar ve Hata Kurtarma",
       badgesTitle: "5. Semantik Durum ve Sürüm Rozetleri",
-      modalsTitle: "6. Erişilebilir Liquid Glass Diyalog Pencereleri",
+      modalsTitle: "6. Erişilebilir Diyalog Pencereleri",
       openDemoModal: "Etkileşimli Cam Pencereyi Aç",
       focusAccessibilityNote:
         "Klavye Erişilebilirliği Hazır: Yüksek kontrastlı odak halkalarını ve hareket azaltma uyumluluğunu test etmek için Tab tuşunu kullanın.",

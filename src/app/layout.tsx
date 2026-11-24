@@ -7,7 +7,7 @@ import { ThemeProvider } from "@/lib/theme/context";
 export const metadata: Metadata = {
   title: "SMART MARKETING — AI-Powered Social Media Marketing Platform",
   description:
-    "Enterprise-grade AI marketing workspace for growing businesses. Liquid Glass design, multi-language, and intelligent social publishing.",
+    "Enterprise-grade AI marketing workspace for growing businesses. multi-language, and intelligent social publishing.",
 };
 
 export default function RootLayout({
@@ -34,10 +34,6 @@ export default function RootLayout({
             __html: `try{var l=localStorage.getItem("smart-marketing-locale");if(l==="ar"){document.documentElement.lang="ar";document.documentElement.dir="rtl"}else if(l==="tr"||l==="en"){document.documentElement.lang=l;document.documentElement.dir="ltr"}}catch(e){}`,
           }}
         />
-        {/* Ambient background light gradients for authentic Liquid Glass depth */}
-        <div className="ambient-glow fixed top-0 -start-40 w-96 h-96 rounded-full bg-accent-violet/10 blur-[120px] pointer-events-none -z-10" />
-        <div className="ambient-glow fixed top-1/3 -end-40 w-96 h-96 rounded-full bg-accent-cyan/10 blur-[130px] pointer-events-none -z-10" />
-        <div className="ambient-glow fixed bottom-0 start-1/3 w-96 h-96 rounded-full bg-accent-indigo/10 blur-[140px] pointer-events-none -z-10" />
 
         <I18nProvider>
           <ThemeProvider>

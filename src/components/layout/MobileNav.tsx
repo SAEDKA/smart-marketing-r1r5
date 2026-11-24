@@ -120,7 +120,7 @@ export const MobileNav = React.memo(function MobileNav({ isOpen, onClose }: Mobi
           {/* Drawer Content */}
           <div
             className={cn(
-              "relative z-10 w-4/5 max-w-sm h-full glass-panel border-e border-white/15 flex flex-col shadow-2xl animate-in duration-200",
+              "relative z-10 w-4/5 max-w-sm h-full surface-panel border-e border-white/15 flex flex-col shadow-2xl animate-in duration-200",
               locale === "ar" ? "slide-in-from-right" : "slide-in-from-left"
             )}
           >
@@ -204,7 +204,7 @@ export const MobileNav = React.memo(function MobileNav({ isOpen, onClose }: Mobi
                 <Link
                   href="/login"
                   onClick={onClose}
-                  className="glass-button-primary w-full h-10 rounded-xl flex items-center justify-center gap-2 text-xs font-semibold text-white"
+                  className="btn-primary w-full h-10 rounded-xl flex items-center justify-center gap-2 text-xs font-semibold text-white"
                 >
                   <LogIn className="w-4 h-4" />
                   <span>{t.access.signInCta}</span>

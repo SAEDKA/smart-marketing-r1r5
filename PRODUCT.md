@@ -12,8 +12,8 @@ Rather than feeling like a generic admin template, the product operates as an **
   - **Turkish (`tr` — LTR)**
   - **Arabic (`ar` — RTL)**
 - **Supported Devices:**
-  - **Desktop & Widescreen (`1024px` – `1440px+`):** Fixed/collapsible Liquid Glass sidebar, contextual top header with breadcrumbs, multi-column workspace grids, and split-screen AI Content Studio.
-  - **Mobile (`360px` – `430px`):** Dedicated touch-first bottom navigation bar + slide-over glass navigation drawer, single-column stacked workflows, and zero horizontal overflow.
+  - **Desktop & Widescreen (`1024px` – `1440px+`):** Fixed/collapsible solid sidebar, contextual top header with breadcrumbs, multi-column workspace grids, and split-screen AI Content Studio.
+  - **Mobile (`360px` – `430px`):** Dedicated touch-first bottom navigation bar + slide-over navigation drawer, single-column stacked workflows, and zero horizontal overflow.
 
 ## 3. Core 14-Step User Journey
 1. Company Registration (`/register`)

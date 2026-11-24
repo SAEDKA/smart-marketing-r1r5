@@ -242,16 +242,16 @@ export const en: Dictionary = {
         "Structured implementation across 3 Epics and 22 Jira Frontend Stories.",
     },
     designSystem: {
-      title: "Liquid Glass Responsive Design System (WEB-01-08)",
+      title: "Solid Responsive Design System (WEB-01-08)",
       subtitle:
-        "Interactive specification of color tokens, translucent glass surfaces, accessible focus states, buttons, inputs, modals, skeletons, and status badges.",
+        "Interactive specification of color tokens, solid raised surfaces, accessible focus states, buttons, inputs, modals, skeletons, and status badges.",
       colorsTitle: "1. Semantic & Atmospheric Color Tokens",
       buttonsTitle: "2. Interactive Button States & Micro-Interactions",
       inputsTitle: "3. Form Controls, Validation & Accessible Focus States",
       statesTitle: "4. Skeletons, Empty States & Error Recovery",
       badgesTitle: "5. Semantic Status & Release Badges",
-      modalsTitle: "6. Accessible Glass Dialogs & Overlays",
-      openDemoModal: "Launch Interactive Glass Modal",
+      modalsTitle: "6. Accessible Dialogs & Overlays",
+      openDemoModal: "Launch Interactive Modal",
       focusAccessibilityNote:
         "Keyboard Navigation Ready: Press Tab across controls to verify high-contrast focus rings and prefers-reduced-motion compliance.",
     },

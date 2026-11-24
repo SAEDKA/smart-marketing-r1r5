@@ -75,11 +75,11 @@ describe("Theme system", () => {
     // White-based utilities are re-tinted under the light theme.
     expect(css).toContain('[data-theme="light"] .text-white');
     expect(css).toContain('[data-theme="light"] .border-white\\/10');
-    // Glass surfaces get light-theme shadows/borders, blur stays.
-    expect(css).toContain('[data-theme="light"] .glass-card');
+    // Surfaces get light-theme shadows and borders.
+    expect(css).toContain('[data-theme="light"] .surface-card');
     // The white theme carries the brand color wash in its background.
     expect(css).toContain('[data-theme="light"] body');
-    expect(css).toContain('[data-theme="light"] .glass-button-primary');
+    expect(css).toContain('[data-theme="light"] .btn-primary');
   });
 
   it("tailwind text/semantic colors are theme-variable driven", () => {
@@ -93,7 +93,7 @@ describe("Theme system", () => {
     expect(css).toContain("--color-txt-primary: rgb(var(--txt-primary-rgb)");
     expect(css).toContain("--color-semantic-error: rgb(var(--semantic-error-rgb)");
     expect(css).toContain("--color-navy-950: rgb(var(--bg-deep-rgb)");
-    expect(css).toContain("--shadow-glass:");
+    expect(css).toContain("--shadow-glow-violet:");
     expect(css).toContain("--radius-card: 20px");
   });
 });

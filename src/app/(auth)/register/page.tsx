@@ -89,9 +89,9 @@ export default function RegisterPage() {
 
   return (
     <div className="w-full max-w-md animate-in fade-in zoom-in-95 duration-300">
-      <Card className="glass-panel border-white/15 shadow-2xl p-6 sm:p-8">
+      <Card className="surface-panel border-white/15 shadow-2xl p-6 sm:p-8">
         <CardHeader className="text-center pb-6">
-          <BrandLogo className="w-12 h-12 mx-auto mb-3 block shadow-glow-violet" />
+          <BrandLogo className="w-12 h-12 mx-auto mb-3 block" />
           <CardTitle className="text-xl sm:text-2xl font-bold tracking-tight text-white">
             {t.auth.registerTitle}
           </CardTitle>

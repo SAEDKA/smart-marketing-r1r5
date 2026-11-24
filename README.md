@@ -48,7 +48,7 @@ The complete product frontend (Saeed's section: landing, auth,
 workspace with dashboard / onboarding / brand / products / campaigns /
 AI content studio / review / calendar / integrations / analytics /
 reports / admin / notifications / settings, the guest → account →
-full access ladder, and the Liquid Glass design with four themes)
+full access ladder, and the Solid design with dark and light themes)
 has been ported onto this foundation:
 
 - All product strings live in the `next-intl` message tree

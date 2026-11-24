@@ -1,7 +1,7 @@
 ---
 version: alpha
-name: Smart-Marketing-Liquid-Glass-Taste-System
-description: Premium Liquid Glass SaaS design system for SMART MARKETING PLATFORM, combining taste-skill non-violet obsidian-emerald-cyan tokens and switchable themes with Stripe-inspired typographic precision (ss01 stylistic set, negative display tracking, and tabular numerals tnum for KPIs, telemetry, and pricing).
+name: Smart-Marketing-Solid-Taste-System
+description: Premium solid-surface SaaS design system for SMART MARKETING PLATFORM, combining taste-skill non-violet obsidian-emerald-cyan tokens and switchable themes with Stripe-inspired typographic precision (ss01 stylistic set, negative display tracking, and tabular numerals tnum for KPIs, telemetry, and pricing).
 
 colors:
   primary: "#38c995"
@@ -154,31 +154,31 @@ spacing:
   huge: 64px
 
 components:
-  glass-button-primary:
+  btn-primary:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.on-primary}"
     typography: "{typography.body-md}"
     rounded: "{rounded.input}"
     padding: 10px 18px
-  glass-button-secondary:
+  btn-secondary:
     backgroundColor: "{colors.bg-surface}"
     textColor: "{colors.ink}"
     typography: "{typography.body-md}"
     rounded: "{rounded.input}"
     padding: 10px 18px
-  glass-input:
+  field-input:
     backgroundColor: "{colors.bg-deep}"
     textColor: "{colors.ink}"
     typography: "{typography.body-md}"
     rounded: "{rounded.input}"
     padding: 10px 14px
-  glass-card:
+  surface-card:
     backgroundColor: "{colors.bg-surface}"
     textColor: "{colors.ink}"
     typography: "{typography.body-md}"
     rounded: "{rounded.card}"
     padding: 24px
-  glass-panel:
+  surface-panel:
     backgroundColor: "{colors.bg-dark}"
     textColor: "{colors.ink}"
     typography: "{typography.body-md}"
@@ -188,4 +188,4 @@ components:
 
 ## Overview
 
-SMART MARKETING PLATFORM combines a **Liquid Glass** atmospheric dark workspace with **taste-skill non-violet editorial tokens (`#0c1116`, `#121920`, `#17212b`, `#38c995` Emerald, `#40d9e8` Glacial Cyan)** and a live token theme switcher. Translucent glass cards with `backdrop-filter: blur(24px) saturate(165%)`, cursor-tracking specular illumination, and subtle inner highlights (`inset 0 1px 0 0 rgba(255,255,255,0.18)`) create depth without compromising readability.
+SMART MARKETING PLATFORM combines a **Solid** atmospheric dark workspace with **taste-skill non-violet editorial tokens (`#0c1116`, `#121920`, `#17212b`, `#38c995` Emerald, `#40d9e8` Glacial Cyan)** and a live token theme switcher. Solid raised cards with hairline borders and soft shadows create depth without compromising readability.

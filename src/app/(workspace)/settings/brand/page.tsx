@@ -177,7 +177,7 @@ export default function BrandSettingsPage() {
 
       {/* Main Settings Form */}
       <form onSubmit={handleSave} className="space-y-6">
-        <Card className="glass-panel border-white/15 shadow-2xl p-6 sm:p-8 space-y-6">
+        <Card className="surface-panel border-white/15 shadow-2xl p-6 sm:p-8 space-y-6">
           <div className="flex items-center justify-between border-b border-white/10 pb-4">
             <div className="flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-accent-violet" />
@@ -209,7 +209,7 @@ export default function BrandSettingsPage() {
                 onChange={(e) =>
                   setCommunicationTone(e.target.value as CommunicationTone)
                 }
-                className="glass-input w-full h-11 px-4 text-sm text-white bg-navy-900 focus:outline-none"
+                className="field-input w-full h-11 px-4 text-sm text-white bg-navy-900 focus:outline-none"
               >
                 <option value="PROFESSIONAL">PROFESSIONAL</option>
                 <option value="FRIENDLY">FRIENDLY</option>

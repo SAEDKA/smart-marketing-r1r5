@@ -27,7 +27,7 @@ export default function AuthLayout({
   const showcase = AUTH_SHOWCASE_COPY[locale];
 
   return (
-    <div className="workspace-calm min-h-screen flex flex-col justify-between p-4 sm:p-6 lg:p-8 relative overflow-x-hidden">
+    <div className="min-h-screen flex flex-col justify-between p-4 sm:p-6 lg:p-8 relative overflow-x-hidden">
       {/* Top Header with Brand, Theme Switcher, and Language Switcher */}
       <header className="w-full max-w-7xl mx-auto flex items-center justify-between py-2 relative z-10">
         <Link href="/" className="flex items-center gap-2.5 group">
@@ -54,7 +54,7 @@ export default function AuthLayout({
 
         {/* Right/End Column: Live Interactive AI Marketing Showcase (Desktop) */}
         <div className="hidden lg:flex lg:col-span-7 flex-col justify-center">
-          <div className="rounded-[26px] glass-panel border border-white/15 p-8 space-y-7 shadow-2xl">
+          <div className="rounded-[26px] surface-panel border border-white/15 p-8 space-y-7 shadow-2xl">
             <div className="space-y-3">
               <h2 className="text-2xl xl:text-3xl font-bold tracking-tight text-white leading-tight">
                 {showcase.headline}

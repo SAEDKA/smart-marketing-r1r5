@@ -395,7 +395,7 @@ export default function CampaignsPage() {
                 onChange={(e) =>
                   setStatusFilter(e.target.value as CampaignStatus | "ALL")
                 }
-                className="glass-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
+                className="field-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
               >
                 <option value="ALL">{t.campaigns.filterAllStatus}</option>
                 <option value="ACTIVE">{t.campaigns.filterActive}</option>
@@ -412,7 +412,7 @@ export default function CampaignsPage() {
                 onChange={(e) =>
                   setObjectiveFilter(e.target.value as CampaignObjective | "ALL")
                 }
-                className="glass-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
+                className="field-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
               >
                 <option value="ALL">{t.campaigns.filterAllObjectives}</option>
                 <option value="INCREASE_SALES">{t.campaigns.filterSales}</option>
@@ -432,7 +432,7 @@ export default function CampaignsPage() {
                 onChange={(e) =>
                   setPlatformFilter(e.target.value as SocialPlatform | "ALL")
                 }
-                className="glass-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
+                className="field-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
               >
                 <option value="ALL">All Platforms</option>
                 <option value="INSTAGRAM">Instagram</option>
@@ -674,7 +674,7 @@ export default function CampaignsPage() {
                 <div
                   className={`w-7 h-7 rounded-full mx-auto flex items-center justify-center text-xs font-bold ${
                     wizardStep === st.num
-                      ? "bg-accent-violet text-white shadow-glow-violet"
+                      ? "bg-accent-violet text-white"
                       : wizardStep > st.num
                       ? "bg-accent-mint/20 text-accent-mint border border-accent-mint/30"
                       : "bg-white/10 text-txt-muted"
@@ -737,7 +737,7 @@ export default function CampaignsPage() {
                       onClick={() => setObjective(obj.key as CampaignObjective)}
                       className={`p-3 rounded-xl border text-start transition-all ${
                         objective === obj.key
-                          ? "bg-accent-violet/20 border-accent-violet text-white shadow-glow-violet"
+                          ? "bg-accent-violet/20 border-accent-violet text-white"
                           : "bg-white/5 border-white/10 text-txt-secondary hover:text-white"
                       }`}
                     >
@@ -838,7 +838,7 @@ export default function CampaignsPage() {
                     onClick={() => togglePlatform("INSTAGRAM")}
                     className={`p-3.5 rounded-2xl border flex items-center gap-3 transition-all ${
                       selectedPlatforms.includes("INSTAGRAM")
-                        ? "bg-pink-500/15 border-pink-500 text-white shadow-glow-violet"
+                        ? "bg-pink-500/15 border-pink-500 text-white"
                         : "bg-white/5 border-white/10 text-txt-secondary hover:text-white"
                     }`}
                   >
@@ -856,7 +856,7 @@ export default function CampaignsPage() {
                     onClick={() => togglePlatform("FACEBOOK")}
                     className={`p-3.5 rounded-2xl border flex items-center gap-3 transition-all ${
                       selectedPlatforms.includes("FACEBOOK")
-                        ? "bg-blue-500/15 border-blue-500 text-white shadow-glow-cyan"
+                        ? "bg-blue-500/15 border-blue-500 text-white"
                         : "bg-white/5 border-white/10 text-txt-secondary hover:text-white"
                     }`}
                   >
@@ -905,7 +905,7 @@ export default function CampaignsPage() {
                     onChange={(e) =>
                       setContentLanguage(e.target.value as ContentLanguage)
                     }
-                    className="glass-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
+                    className="field-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
                   >
                     <option value="en">English (en)</option>
                     <option value="tr">Türkçe (tr)</option>
@@ -922,7 +922,7 @@ export default function CampaignsPage() {
                     onChange={(e) =>
                       setCommunicationTone(e.target.value as CommunicationTone)
                     }
-                    className="glass-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
+                    className="field-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
                   >
                     <option value="PROFESSIONAL">PROFESSIONAL</option>
                     <option value="FRIENDLY">FRIENDLY</option>
@@ -945,7 +945,7 @@ export default function CampaignsPage() {
           {/* STEP 4: Review & Launch */}
           {wizardStep === 4 && (
             <div className="space-y-4 animate-in fade-in duration-200">
-              <div className="p-4 rounded-2xl glass-card space-y-3 text-xs">
+              <div className="p-4 rounded-2xl surface-card space-y-3 text-xs">
                 <div className="flex items-center justify-between border-b border-white/10 pb-2">
                   <span className="font-bold text-white text-sm">{name}</span>
                   <Badge variant="cyan">{getObjectiveLabel(objective)}</Badge>

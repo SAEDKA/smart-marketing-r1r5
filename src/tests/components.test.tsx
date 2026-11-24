@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/Input";
 import { Badge } from "@/components/ui/Badge";
 import { Card, CardTitle, CardContent } from "@/components/ui/Card";
 
-describe("Liquid Glass Design System Components (WEB-01-08)", () => {
+describe("Solid Design System Components (WEB-01-08)", () => {
   it("renders Button with primary styling and handles loading state", () => {
     const { rerender } = render(<Button variant="primary">Click Me</Button>);
     expect(screen.getByRole("button", { name: "Click Me" })).toBeDefined();

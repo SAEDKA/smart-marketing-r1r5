@@ -51,7 +51,7 @@ interface NavItem {
   badgeTone?: "cyan" | "violet" | "mint";
 }
 
-export const GlassSidebar = React.memo(function GlassSidebar() {
+export const AppSidebar = React.memo(function AppSidebar() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { t, dir, locale } = useI18n();
@@ -203,7 +203,7 @@ export const GlassSidebar = React.memo(function GlassSidebar() {
     <aside
       className={cn(
         "hidden lg:flex flex-col shrink-0 h-screen sticky top-0 z-30 transition-all duration-300",
-        "glass-panel border-e border-white/15 shadow-2xl",
+        "surface-panel border-e border-white/15 shadow-2xl",
         isCollapsed ? "w-20" : "w-72"
       )}
     >
@@ -214,7 +214,7 @@ export const GlassSidebar = React.memo(function GlassSidebar() {
             href="/dashboard"
             className="flex items-center gap-3 overflow-hidden group"
           >
-            <BrandLogo className="w-10 h-10 shadow-glow-violet group-hover:scale-105 transition-transform" />
+            <BrandLogo className="w-10 h-10 group-hover:scale-105 transition-transform" />
             <div className="flex flex-col truncate">
               <span className="text-sm font-bold tracking-tight text-white truncate">
                 {t.meta.appName}
@@ -268,7 +268,7 @@ export const GlassSidebar = React.memo(function GlassSidebar() {
             <button
               type="button"
               onClick={handleLockedClick}
-              className="w-full h-10 px-3.5 rounded-[13px] glass-button-primary flex items-center justify-center gap-2 text-xs font-semibold text-white opacity-45"
+              className="w-full h-10 px-3.5 rounded-[13px] btn-primary flex items-center justify-center gap-2 text-xs font-semibold text-white opacity-45"
             >
               <Wand2 className="w-3.5 h-3.5 shrink-0" />
               <span className="truncate">{aiQuickCtaLabel}</span>
@@ -277,7 +277,7 @@ export const GlassSidebar = React.memo(function GlassSidebar() {
           ) : (
             <Link
               href="/content-studio"
-              className="w-full h-10 px-3.5 rounded-[13px] glass-button-primary flex items-center justify-center gap-2 text-xs font-semibold text-white"
+              className="w-full h-10 px-3.5 rounded-[13px] btn-primary flex items-center justify-center gap-2 text-xs font-semibold text-white"
             >
               <Wand2 className="w-3.5 h-3.5 shrink-0" />
               <span className="truncate">{aiQuickCtaLabel}</span>
@@ -328,7 +328,7 @@ export const GlassSidebar = React.memo(function GlassSidebar() {
                   className={cn(
                     "flex items-center gap-3 px-3.5 py-2.5 rounded-[13px] text-xs font-medium transition-all duration-200 group relative select-none",
                     isActive
-                      ? "bg-gradient-to-r from-accent-violet/25 via-accent-indigo/15 to-transparent text-white border border-accent-violet/40 shadow-glow-violet/20"
+                      ? "bg-accent-violet/15 text-white border border-accent-violet/40"
                       : "text-txt-secondary hover:text-white hover:bg-white/5 border border-transparent"
                   )}
                 >
@@ -363,7 +363,7 @@ export const GlassSidebar = React.memo(function GlassSidebar() {
                   )}
 
                   {isActive && (
-                    <span className="absolute start-1 top-1/2 -translate-y-1/2 w-1 h-5 rounded-full bg-accent-cyan shadow-glow-cyan" />
+                    <span className="absolute start-1 top-1/2 -translate-y-1/2 w-1 h-5 rounded-full bg-accent-cyan" />
                   )}
                 </Link>
               );
@@ -378,7 +378,7 @@ export const GlassSidebar = React.memo(function GlassSidebar() {
           <Link
             href="/login"
             title={t.access.signInCta}
-            className="glass-button-primary w-full h-10 px-3.5 rounded-[13px] flex items-center justify-center gap-2 text-xs font-semibold text-white"
+            className="btn-primary w-full h-10 px-3.5 rounded-[13px] flex items-center justify-center gap-2 text-xs font-semibold text-white"
           >
             <LogIn className="w-4 h-4 shrink-0" />
             {!isCollapsed && <span>{t.access.signInCta}</span>}
@@ -396,7 +396,7 @@ export const GlassSidebar = React.memo(function GlassSidebar() {
 
             <div className="flex items-center justify-between pt-1">
               <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-accent-violet to-accent-indigo flex items-center justify-center text-white text-xs font-bold shrink-0 shadow-glow-violet">
+                <div className="w-8 h-8 rounded-full bg-accent-violet flex items-center justify-center text-white text-xs font-bold shrink-0">
                   {user?.fullName?.charAt(0) || "S"}
                 </div>
                 <div className="truncate text-start">

@@ -47,7 +47,7 @@ export function AccessNoticeToast() {
       role="alert"
       className="fixed bottom-24 lg:bottom-8 left-1/2 -translate-x-1/2 z-[70] w-[calc(100%-2rem)] max-w-md animate-in fade-in slide-in-from-bottom-4 duration-300"
     >
-      <div className="glass-panel rounded-2xl p-4 flex items-start gap-3 shadow-2xl">
+      <div className="surface-panel rounded-2xl p-4 flex items-start gap-3 shadow-2xl">
         <span className="w-10 h-10 rounded-full bg-accent-cyan/15 border border-accent-cyan/30 flex items-center justify-center shrink-0">
           <Icon className="w-5 h-5 text-accent-cyan" />
         </span>
@@ -61,7 +61,7 @@ export function AccessNoticeToast() {
           <button
             type="button"
             onClick={handleAction}
-            className="glass-button-primary mt-3 px-3.5 h-8 rounded-[10px] text-xs font-semibold text-white inline-flex items-center"
+            className="btn-primary mt-3 px-3.5 h-8 rounded-[10px] text-xs font-semibold text-white inline-flex items-center"
           >
             {isLogin ? t.access.signInCta : t.access.companyCta}
           </button>

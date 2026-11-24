@@ -70,7 +70,7 @@ export function Modal({
       <div
         ref={dialogRef}
         className={cn(
-          "relative z-10 w-full glass-panel rounded-[24px] p-6 shadow-2xl transition-all",
+          "relative z-10 w-full surface-panel rounded-[24px] p-6 shadow-2xl transition-all",
           "border border-white/15 animate-in zoom-in-95",
           maxWidthStyles[maxWidth],
           className

@@ -458,7 +458,7 @@ export default function ProductsPage() {
                 onChange={(e) =>
                   setStatusFilter(e.target.value as ProductStatus | "ALL")
                 }
-                className="glass-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
+                className="field-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
               >
                 <option value="ALL">{t.products.filterAll}</option>
                 <option value="ACTIVE">{t.products.filterActive}</option>
@@ -472,7 +472,7 @@ export default function ProductsPage() {
               <select
                 value={categoryFilter}
                 onChange={(e) => setCategoryFilter(e.target.value)}
-                className="glass-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
+                className="field-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
               >
                 <option value="ALL">{t.products.allCategories}</option>
                 {availableCategories.map((cat) => (
@@ -491,7 +491,7 @@ export default function ProductsPage() {
                 title={t.products.cardView}
                 className={`p-2 rounded-lg transition-colors ${
                   viewMode === "card"
-                    ? "bg-accent-violet/20 text-white shadow-glow-violet/20"
+                    ? "bg-accent-violet/20 text-white"
                     : "text-txt-muted hover:text-white"
                 }`}
               >
@@ -503,7 +503,7 @@ export default function ProductsPage() {
                 title={t.products.tableView}
                 className={`p-2 rounded-lg transition-colors ${
                   viewMode === "table"
-                    ? "bg-accent-violet/20 text-white shadow-glow-violet/20"
+                    ? "bg-accent-violet/20 text-white"
                     : "text-txt-muted hover:text-white"
                 }`}
               >
@@ -907,7 +907,7 @@ export default function ProductsPage() {
               <select
                 value={formStatus}
                 onChange={(e) => setFormStatus(e.target.value as ProductStatus)}
-                className="glass-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
+                className="field-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
               >
                 <option value="ACTIVE">ACTIVE</option>
                 <option value="DRAFT">DRAFT</option>
@@ -1006,7 +1006,7 @@ export default function ProductsPage() {
                 {selectedProduct?.media.map((med, idx) => (
                   <div
                     key={med.id}
-                    className="p-3 rounded-2xl glass-card flex items-center justify-between gap-3 text-xs"
+                    className="p-3 rounded-2xl surface-card flex items-center justify-between gap-3 text-xs"
                   >
                     {/* Media Thumbnail & Meta */}
                     <div className="flex items-center gap-3 min-w-0">

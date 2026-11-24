@@ -165,7 +165,7 @@ export default function OnboardingPage() {
       </div>
 
       {/* Progress Stepper Bar */}
-      <div className="glass-card p-4 sm:p-6">
+      <div className="surface-card p-4 sm:p-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {steps.map((st) => {
             const isCompleted = currentStep > st.number || isSaved;
@@ -192,7 +192,7 @@ export default function OnboardingPage() {
                     isCompleted
                       ? "bg-accent-mint/20 text-accent-mint border border-accent-mint/30"
                       : isCurrent
-                      ? "bg-accent-violet text-white shadow-glow-violet"
+                      ? "bg-accent-violet text-white"
                       : "bg-white/10 text-txt-muted"
                   }`}
                 >
@@ -213,7 +213,7 @@ export default function OnboardingPage() {
       </div>
 
       {/* Form Card Content */}
-      <Card className="glass-panel border-white/15 shadow-2xl p-6 sm:p-8">
+      <Card className="surface-panel border-white/15 shadow-2xl p-6 sm:p-8">
         {/* Error notification with safe input preservation feedback */}
         {apiError && (
           <div
@@ -335,7 +335,7 @@ export default function OnboardingPage() {
                     onClick={() => setPreferredLanguage(item.code as ContentLanguage)}
                     className={`p-3.5 rounded-2xl border text-center transition-all ${
                       preferredLanguage === item.code
-                        ? "bg-accent-violet/20 border-accent-violet shadow-glow-violet text-white"
+                        ? "bg-accent-violet/20 border-accent-violet text-white"
                         : "bg-white/5 border-white/10 text-txt-secondary hover:text-white hover:bg-white/10"
                     }`}
                   >
@@ -359,7 +359,7 @@ export default function OnboardingPage() {
                     onClick={() => setCommunicationTone(tone)}
                     className={`p-3 rounded-xl border text-start transition-all ${
                       communicationTone === tone
-                        ? "bg-accent-cyan/15 border-accent-cyan text-white shadow-glow-cyan"
+                        ? "bg-accent-cyan/15 border-accent-cyan text-white"
                         : "bg-white/5 border-white/10 text-txt-secondary hover:text-white"
                     }`}
                   >

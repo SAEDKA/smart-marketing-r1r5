@@ -164,7 +164,7 @@ export default function SettingsPage() {
       </div>
 
       {/* USER PROFILE SECTION */}
-      <div className="glass-card p-6 space-y-5">
+      <div className="surface-card p-6 space-y-5">
         <div className="flex items-center gap-3 border-b border-white/10 pb-4">
           <div className="w-10 h-10 rounded-xl bg-accent-violet/20 border border-accent-violet/30 flex items-center justify-center">
             <User className="w-5 h-5 text-accent-cyan" />
@@ -200,7 +200,7 @@ export default function SettingsPage() {
                 type="text"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
-                className="glass-input w-full h-10 px-3 text-white text-xs focus:outline-none"
+                className="field-input w-full h-10 px-3 text-white text-xs focus:outline-none"
                 required
               />
             </div>
@@ -238,7 +238,7 @@ export default function SettingsPage() {
                   onClick={() => setLocale(lang.code)}
                   className={`py-2 px-3 rounded-xl text-xs font-semibold border transition text-center ${
                     locale === lang.code
-                      ? "bg-accent-violet text-white border-accent-violet shadow-glow-violet"
+                      ? "bg-accent-violet text-white border-accent-violet"
                       : "bg-white/5 text-txt-secondary border-white/10 hover:bg-white/10 hover:text-white"
                   }`}
                 >
@@ -269,7 +269,7 @@ export default function SettingsPage() {
                   aria-pressed={theme === option.id}
                   className={`py-2 px-3 rounded-xl text-xs font-semibold border transition flex items-center justify-center gap-2 ${
                     theme === option.id
-                      ? "bg-accent-violet text-white border-accent-violet shadow-glow-violet"
+                      ? "bg-accent-violet text-white border-accent-violet"
                       : "bg-white/5 text-txt-secondary border-white/10 hover:bg-white/10 hover:text-white"
                   }`}
                 >
@@ -294,7 +294,7 @@ export default function SettingsPage() {
             <button
               type="submit"
               disabled={profileLoading}
-              className="px-5 py-2.5 rounded-xl text-xs font-semibold glass-button-primary text-white transition flex items-center gap-2"
+              className="px-5 py-2.5 rounded-xl text-xs font-semibold btn-primary text-white transition flex items-center gap-2"
             >
               {profileLoading && (
                 <RefreshCw className="w-3.5 h-3.5 animate-spin" />
@@ -306,7 +306,7 @@ export default function SettingsPage() {
       </div>
 
       {/* SECURITY & PASSWORD SECTION */}
-      <div className="glass-card p-6 space-y-5">
+      <div className="surface-card p-6 space-y-5">
         <div className="flex items-center gap-3 border-b border-white/10 pb-4">
           <div className="w-10 h-10 rounded-xl bg-semantic-error/20 border border-semantic-error/30 flex items-center justify-center">
             <Lock className="w-5 h-5 text-semantic-error" />
@@ -348,7 +348,7 @@ export default function SettingsPage() {
               type="password"
               value={currentPassword}
               onChange={(e) => setCurrentPassword(e.target.value)}
-              className="glass-input w-full max-w-md h-10 px-3 text-white text-xs focus:outline-none"
+              className="field-input w-full max-w-md h-10 px-3 text-white text-xs focus:outline-none"
               required
             />
           </div>
@@ -362,7 +362,7 @@ export default function SettingsPage() {
                 type="password"
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
-                className="glass-input w-full h-10 px-3 text-white text-xs focus:outline-none"
+                className="field-input w-full h-10 px-3 text-white text-xs focus:outline-none"
                 required
               />
             </div>
@@ -375,7 +375,7 @@ export default function SettingsPage() {
                 type="password"
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="glass-input w-full h-10 px-3 text-white text-xs focus:outline-none"
+                className="field-input w-full h-10 px-3 text-white text-xs focus:outline-none"
                 required
               />
             </div>
@@ -398,7 +398,7 @@ export default function SettingsPage() {
 
       {/* CUSTOMER SUPPORT & SUBMIT COMPLAINT SECTION (Only for Company Owners) */}
       {!isAdmin && (
-        <div className="glass-card p-6 space-y-5">
+        <div className="surface-card p-6 space-y-5">
           <div className="flex items-center gap-3 border-b border-white/10 pb-4">
             <div className="w-10 h-10 rounded-xl bg-accent-cyan/15 border border-accent-cyan/30 flex items-center justify-center">
               <MessageSquareWarning className="w-5 h-5 text-accent-cyan" />
@@ -451,7 +451,7 @@ export default function SettingsPage() {
                       e.target.value as AdminComplaintTicket["category"]
                     )
                   }
-                  className="glass-input w-full h-10 px-3 text-xs text-white bg-navy-900 focus:outline-none"
+                  className="field-input w-full h-10 px-3 text-xs text-white bg-navy-900 focus:outline-none"
                 >
                   <option value="TECHNICAL">
                     {locale === "ar" ? "مشكلة تقنية" : "Technical Issue"}
@@ -489,7 +489,7 @@ export default function SettingsPage() {
                       ? "مثال: استفسار حول جدولة منشورات إنستغرام..."
                       : "e.g. Question about scheduled post publishing..."
                   }
-                  className="glass-input w-full h-10 px-3 text-xs text-white focus:outline-none"
+                  className="field-input w-full h-10 px-3 text-xs text-white focus:outline-none"
                   required
                 />
               </div>
@@ -512,7 +512,7 @@ export default function SettingsPage() {
                     ? "اشرح المشكلة أو الاستفسار بوضوح ليتمكن فريق الإدارة من مساعدتك..."
                     : "Describe how we can help..."
                 }
-                className="glass-input w-full p-3 text-xs text-white focus:outline-none"
+                className="field-input w-full p-3 text-xs text-white focus:outline-none"
                 required
               />
             </div>
@@ -521,7 +521,7 @@ export default function SettingsPage() {
               <button
                 type="submit"
                 disabled={ticketLoading}
-                className="px-5 py-2.5 rounded-xl text-xs font-semibold glass-button-primary text-white flex items-center gap-2"
+                className="px-5 py-2.5 rounded-xl text-xs font-semibold btn-primary text-white flex items-center gap-2"
               >
                 <Send className="w-3.5 h-3.5" />
                 <span>

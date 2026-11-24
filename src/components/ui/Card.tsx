@@ -9,7 +9,7 @@ function CardImpl({ className, interactive = false, children, ...props }: CardPr
   return (
     <div
       className={cn(
-        interactive ? "glass-card-interactive" : "glass-card",
+        interactive ? "surface-card-interactive" : "surface-card",
         "p-6",
         className
       )}

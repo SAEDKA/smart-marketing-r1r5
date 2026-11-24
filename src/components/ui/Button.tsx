@@ -37,9 +37,9 @@ const ButtonImpl = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const variantStyles = {
       primary:
-        "glass-button-primary",
+        "btn-primary",
       secondary:
-        "glass-button-secondary",
+        "btn-secondary",
       outline:
         "bg-transparent text-white border border-white/20 hover:border-accent-violet hover:bg-white/5",
       ghost:

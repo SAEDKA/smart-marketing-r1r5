@@ -5,7 +5,6 @@ import Link from "next/link";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/lib/auth/context";
-import { useSpotlight } from "@/lib/hooks/use-spotlight";
 import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { GettingStartedCard } from "@/components/dashboard/GettingStartedCard";
 import { useI18n } from "@/lib/i18n/context";
@@ -155,8 +154,6 @@ export default function DashboardPage() {
     accounts.length > 0 ||
     metrics.reach > 0;
 
-  const handleSpotlightMove = useSpotlight();
-
   const handleAssistantSubmit = useCallback(
     (e: React.FormEvent) => {
       e.preventDefault();
@@ -213,7 +210,7 @@ export default function DashboardPage() {
   if (!user) {
     return (
       <div className="space-y-7 animate-in fade-in duration-300">
-        <section className="glass-panel rounded-[26px] p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center gap-5">
+        <section className="surface-panel rounded-[26px] p-6 sm:p-8 flex flex-col sm:flex-row sm:items-center gap-5">
           <span className="w-12 h-12 rounded-full bg-accent-cyan/15 border border-accent-cyan/30 flex items-center justify-center shrink-0">
             <Lock className="w-6 h-6 text-accent-cyan" />
           </span>
@@ -228,13 +225,13 @@ export default function DashboardPage() {
           <div className="flex items-center gap-2.5 shrink-0">
             <Link
               href="/login"
-              className="inline-flex items-center h-10 px-4 rounded-[12px] glass-button-secondary text-xs font-semibold text-white"
+              className="inline-flex items-center h-10 px-4 rounded-[12px] btn-secondary text-xs font-semibold text-white"
             >
               {t.access.signInCta}
             </Link>
             <Link
               href="/register"
-              className="inline-flex items-center h-10 px-4 rounded-[12px] glass-button-primary text-xs font-semibold text-white"
+              className="inline-flex items-center h-10 px-4 rounded-[12px] btn-primary text-xs font-semibold text-white"
             >
               {t.access.registerCta}
             </Link>
@@ -270,7 +267,7 @@ export default function DashboardPage() {
 
       {/* While the overview loads: card + a plain loading panel only */}
       {!loaded && (
-        <section className="glass-panel rounded-[26px] p-6 sm:p-8">
+        <section className="surface-panel rounded-[26px] p-6 sm:p-8">
           <p className="text-sm text-txt-secondary">{t.common.loading}</p>
         </section>
       )}
@@ -278,7 +275,7 @@ export default function DashboardPage() {
       {/* Loaded but the company has done nothing yet: an honest empty
           state instead of demo numbers from another workspace */}
       {loaded && !hasActivity && (
-        <section className="glass-panel rounded-[26px] p-6 sm:p-8 flex flex-col items-center text-center gap-3">
+        <section className="surface-panel rounded-[26px] p-6 sm:p-8 flex flex-col items-center text-center gap-3">
           <span className="w-12 h-12 rounded-full bg-accent-violet/15 border border-accent-violet/30 flex items-center justify-center">
             <Sparkles className="w-6 h-6 text-accent-violet" />
           </span>
@@ -296,8 +293,8 @@ export default function DashboardPage() {
 
       {/* 1. AI Marketing Assistant Command Center Hero with Cursor Spotlight */}
       <section
-        onMouseMove={handleSpotlightMove}
-        className="relative overflow-hidden rounded-[26px] glass-panel glass-spotlight p-6 sm:p-8"
+       
+        className="relative overflow-hidden rounded-[26px] surface-panel p-6 sm:p-8"
       >
         <div className="relative z-10 space-y-6">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
@@ -339,7 +336,7 @@ export default function DashboardPage() {
             className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 p-2 rounded-[16px] bg-navy-950/75 border border-white/15 shadow-inner"
           >
             <div className="flex items-center gap-3 flex-1 px-3 py-1.5">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-accent-violet to-accent-cyan flex items-center justify-center shrink-0 shadow-glow-violet">
+              <div className="w-9 h-9 rounded-xl bg-accent-violet flex items-center justify-center shrink-0">
                 <Wand2 className="w-4 h-4 text-navy-950" />
               </div>
               <input
@@ -386,8 +383,8 @@ export default function DashboardPage() {
       {/* 2. Executive KPI Strip (Animated Count-Up + Area Sparklines) */}
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div
-          onMouseMove={handleSpotlightMove}
-          className="glass-card-interactive glass-spotlight p-5 flex flex-col justify-between space-y-4"
+         
+          className="surface-card-interactive p-5 flex flex-col justify-between space-y-4"
         >
           <div className="flex items-center justify-between relative z-10">
             <span className="text-xs font-semibold text-txt-secondary">
@@ -430,8 +427,8 @@ export default function DashboardPage() {
         </div>
 
         <div
-          onMouseMove={handleSpotlightMove}
-          className="glass-card-interactive glass-spotlight p-5 flex flex-col justify-between space-y-4"
+         
+          className="surface-card-interactive p-5 flex flex-col justify-between space-y-4"
         >
           <div className="flex items-center justify-between relative z-10">
             <span className="text-xs font-semibold text-txt-secondary">
@@ -475,8 +472,8 @@ export default function DashboardPage() {
         </div>
 
         <div
-          onMouseMove={handleSpotlightMove}
-          className="glass-card-interactive glass-spotlight p-5 flex flex-col justify-between space-y-4"
+         
+          className="surface-card-interactive p-5 flex flex-col justify-between space-y-4"
         >
           <div className="flex items-center justify-between relative z-10">
             <span className="text-xs font-semibold text-txt-secondary">
@@ -520,8 +517,8 @@ export default function DashboardPage() {
         </div>
 
         <div
-          onMouseMove={handleSpotlightMove}
-          className="glass-card-interactive glass-spotlight p-5 flex flex-col justify-between space-y-4"
+         
+          className="surface-card-interactive p-5 flex flex-col justify-between space-y-4"
         >
           <div className="flex items-center justify-between relative z-10">
             <span className="text-xs font-semibold text-txt-secondary">
@@ -566,8 +563,8 @@ export default function DashboardPage() {
 
       {/* 3. End-to-End Marketing Workflow Pipeline + Pulsing Vector Line */}
       <Card
-        onMouseMove={handleSpotlightMove}
-        className="p-6 glass-spotlight"
+       
+        className="p-6"
       >
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-4 border-b border-white/10 relative z-10">
           <div>
