@@ -305,19 +305,34 @@ export default function BrandSettingsPage() {
               <label className="block text-xs font-medium text-txt-secondary mb-1.5">
                 {t.brand.communicationTone}
               </label>
-              <select
-                value={communicationTone}
-                onChange={(e) =>
-                  setCommunicationTone(e.target.value as CommunicationTone)
-                }
-                className="field-input w-full h-11 px-4 text-sm text-white bg-navy-900 focus:outline-none"
-              >
-                <option value="PROFESSIONAL">PROFESSIONAL</option>
-                <option value="FRIENDLY">FRIENDLY</option>
-                <option value="LUXURY">LUXURY</option>
-                <option value="BOLD">BOLD</option>
-                <option value="EDUCATIONAL">EDUCATIONAL</option>
-              </select>
+              {/* Tappable chips in the interface language — a native select
+                  shows raw English enum names and a browser-blue popup
+                  that clashes with the theme. */}
+              <div className="flex flex-wrap gap-2">
+                {(
+                  [
+                    ["PROFESSIONAL", t.onboarding.tones.PROFESSIONAL],
+                    ["FRIENDLY", t.onboarding.tones.FRIENDLY],
+                    ["LUXURY", t.onboarding.tones.LUXURY],
+                    ["BOLD", t.onboarding.tones.BOLD],
+                    ["EDUCATIONAL", t.onboarding.tones.EDUCATIONAL],
+                  ] as [CommunicationTone, string][]
+                ).map(([value, label]) => (
+                  <button
+                    key={value}
+                    type="button"
+                    onClick={() => setCommunicationTone(value)}
+                    aria-pressed={communicationTone === value}
+                    className={`px-3 py-1.5 rounded-full border text-xs transition-all ${
+                      communicationTone === value
+                        ? "bg-accent-violet/20 border-accent-violet text-white font-semibold"
+                        : "bg-white/5 border-white/10 text-txt-secondary hover:text-white"
+                    }`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
 
@@ -335,24 +350,24 @@ export default function BrandSettingsPage() {
             <label className="block text-xs font-medium text-txt-secondary">
               {t.brand.preferredLanguage}
             </label>
-            <div className="grid grid-cols-3 gap-3">
+            <div className="flex flex-wrap gap-2">
               {[
-                { code: "en", label: "English", flag: "🇬🇧" },
-                { code: "tr", label: "Türkçe", flag: "🇹🇷" },
-                { code: "ar", label: "العربية", flag: "🇸🇦" },
+                { code: "en", label: "English" },
+                { code: "tr", label: "Türkçe" },
+                { code: "ar", label: "العربية" },
               ].map((item) => (
                 <button
                   key={item.code}
                   type="button"
                   onClick={() => setPreferredLanguage(item.code as ContentLanguage)}
-                  className={`p-3 rounded-xl border text-center transition-all ${
+                  aria-pressed={preferredLanguage === item.code}
+                  className={`px-4 py-2 rounded-full border text-xs transition-all ${
                     preferredLanguage === item.code
                       ? "bg-accent-violet/20 border-accent-violet text-white font-semibold"
                       : "bg-white/5 border-white/10 text-txt-secondary hover:text-white"
                   }`}
                 >
-                  <span className="text-base me-2">{item.flag}</span>
-                  <span className="text-xs">{item.label}</span>
+                  {item.label}
                 </button>
               ))}
             </div>
