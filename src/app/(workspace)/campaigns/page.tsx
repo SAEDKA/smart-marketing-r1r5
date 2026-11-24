@@ -94,6 +94,7 @@ export default function CampaignsPage() {
   const [contentLanguage, setContentLanguage] = useState<ContentLanguage>("en");
   const [communicationTone, setCommunicationTone] = useState<CommunicationTone>("LUXURY");
   const [publishingFrequency, setPublishingFrequency] = useState("3 posts/week");
+  const [freqOtherOpen, setFreqOtherOpen] = useState(false);
   const [budgetNotes, setBudgetNotes] = useState("");
 
   // Load Campaigns and Products
@@ -900,45 +901,141 @@ export default function CampaignsPage() {
                   <label className="block text-xs font-medium text-txt-secondary mb-1.5">
                     {t.campaigns.languageLabel}
                   </label>
-                  <select
-                    value={contentLanguage}
-                    onChange={(e) =>
-                      setContentLanguage(e.target.value as ContentLanguage)
-                    }
-                    className="field-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
-                  >
-                    <option value="en">English (en)</option>
-                    <option value="tr">Türkçe (tr)</option>
-                    <option value="ar">العربية (ar)</option>
-                  </select>
+                  {/* Name-only chips: a native select shows language codes
+                      and a browser-blue popup that clashes with the theme. */}
+                  <div className="flex flex-wrap gap-2">
+                    {(
+                      [
+                        ["en", "English"],
+                        ["tr", "Türkçe"],
+                        ["ar", "العربية"],
+                      ] as [ContentLanguage, string][]
+                    ).map(([code, label]) => (
+                      <button
+                        key={code}
+                        type="button"
+                        onClick={() => setContentLanguage(code)}
+                        aria-pressed={contentLanguage === code}
+                        className={`px-4 py-2 rounded-full border text-xs transition-all ${
+                          contentLanguage === code
+                            ? "bg-accent-violet/20 border-accent-violet text-white font-semibold"
+                            : "bg-white/5 border-white/10 text-txt-secondary hover:text-white"
+                        }`}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
                 <div>
                   <label className="block text-xs font-medium text-txt-secondary mb-1.5">
                     {t.campaigns.toneLabel}
                   </label>
-                  <select
-                    value={communicationTone}
-                    onChange={(e) =>
-                      setCommunicationTone(e.target.value as CommunicationTone)
-                    }
-                    className="field-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
-                  >
-                    <option value="PROFESSIONAL">PROFESSIONAL</option>
-                    <option value="FRIENDLY">FRIENDLY</option>
-                    <option value="LUXURY">LUXURY</option>
-                    <option value="BOLD">BOLD</option>
-                    <option value="EDUCATIONAL">EDUCATIONAL</option>
-                  </select>
+                  {/* Localized tappable chips — same fix as Brand settings:
+                      no raw English enum names, no browser-blue popup. */}
+                  <div className="flex flex-wrap gap-2">
+                    {(
+                      [
+                        ["PROFESSIONAL", t.onboarding.tones.PROFESSIONAL],
+                        ["FRIENDLY", t.onboarding.tones.FRIENDLY],
+                        ["LUXURY", t.onboarding.tones.LUXURY],
+                        ["BOLD", t.onboarding.tones.BOLD],
+                        ["EDUCATIONAL", t.onboarding.tones.EDUCATIONAL],
+                      ] as [CommunicationTone, string][]
+                    ).map(([value, label]) => (
+                      <button
+                        key={value}
+                        type="button"
+                        onClick={() => setCommunicationTone(value)}
+                        aria-pressed={communicationTone === value}
+                        className={`px-3 py-1.5 rounded-full border text-xs transition-all ${
+                          communicationTone === value
+                            ? "bg-accent-violet/20 border-accent-violet text-white font-semibold"
+                            : "bg-white/5 border-white/10 text-txt-secondary hover:text-white"
+                        }`}
+                      >
+                        {label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              <Input
-                label={t.campaigns.frequencyLabel}
-                placeholder="e.g. 3 carousels + 2 stories per week"
-                value={publishingFrequency}
-                onChange={(e) => setPublishingFrequency(e.target.value)}
-              />
+              <div>
+                <label className="block text-xs font-medium text-txt-secondary mb-1.5">
+                  {t.campaigns.frequencyLabel}
+                </label>
+                {/* Ready-made rhythms to tap, with an "Other" escape —
+                    a blank box with an English example helped nobody. */}
+                <div className="flex flex-wrap gap-2">
+                  {t.campaigns.frequencyOptions.map((option) => (
+                    <button
+                      key={option}
+                      type="button"
+                      onClick={() => {
+                        setPublishingFrequency(option);
+                        setFreqOtherOpen(false);
+                      }}
+                      aria-pressed={
+                        publishingFrequency === option && !freqOtherOpen
+                      }
+                      className={`px-3 py-1.5 rounded-full border text-xs transition-all ${
+                        publishingFrequency === option && !freqOtherOpen
+                          ? "bg-accent-violet/20 border-accent-violet text-white font-semibold"
+                          : "bg-white/5 border-white/10 text-txt-secondary hover:text-white"
+                      }`}
+                    >
+                      {option}
+                    </button>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setFreqOtherOpen(true);
+                      if (
+                        t.campaigns.frequencyOptions.includes(
+                          publishingFrequency
+                        )
+                      ) {
+                        setPublishingFrequency("");
+                      }
+                    }}
+                    aria-pressed={
+                      freqOtherOpen ||
+                      (publishingFrequency !== "" &&
+                        !t.campaigns.frequencyOptions.includes(
+                          publishingFrequency
+                        ))
+                    }
+                    className={`px-3 py-1.5 rounded-full border border-dashed text-xs transition-all ${
+                      freqOtherOpen ||
+                      (publishingFrequency !== "" &&
+                        !t.campaigns.frequencyOptions.includes(
+                          publishingFrequency
+                        ))
+                        ? "bg-accent-violet/20 border-accent-violet text-white font-semibold"
+                        : "bg-white/5 border-white/10 text-txt-secondary hover:text-white"
+                    }`}
+                  >
+                    {t.campaigns.otherLabel}
+                  </button>
+                </div>
+                {(freqOtherOpen ||
+                  (publishingFrequency !== "" &&
+                    !t.campaigns.frequencyOptions.includes(
+                      publishingFrequency
+                    ))) && (
+                  <div className="mt-2">
+                    <Input
+                      aria-label={t.campaigns.frequencyLabel}
+                      placeholder={t.campaigns.otherPlaceholder}
+                      value={publishingFrequency}
+                      onChange={(e) => setPublishingFrequency(e.target.value)}
+                    />
+                  </div>
+                )}
+              </div>
             </div>
           )}
 
@@ -967,7 +1064,16 @@ export default function CampaignsPage() {
                   <div>
                     <span className="text-txt-muted block">Tone & Language:</span>
                     <strong className="text-white">
-                      {communicationTone} &bull; {contentLanguage.toUpperCase()}
+                      {t.onboarding.tones[communicationTone]} &bull;{" "}
+                      {
+                        (
+                          {
+                            en: "English",
+                            tr: "Türkçe",
+                            ar: "العربية",
+                          } as Record<ContentLanguage, string>
+                        )[contentLanguage]
+                      }
                     </strong>
                   </div>
                   <div>

@@ -343,7 +343,7 @@ export const ar: Dictionary = {
       subtitle:
         "إنشاء حملاتك ومتابعتها على إنستغرام الاحترافي وصفحات فيسبوك.",
       createCampaign: "إنشاء حملة جديدة",
-      createWizardTitle: "معالج إنشاء الحملات (WEB-02-03)",
+      createWizardTitle: "معالج إنشاء الحملات",
       createWizardSubtitle:
         "إعداد موجه خطوة بخطوة للحملة يشمل تحديد الأهداف، منطق التواريخ، واختيار المنتجات.",
       editCampaign: "تعديل تفاصيل الحملة",
@@ -369,7 +369,16 @@ export const ar: Dictionary = {
       endDateLabel: "تاريخ الانتهاء",
       toneLabel: "نبرة التواصل",
       languageLabel: "لغة المحتوى",
-      frequencyLabel: "معدل النشر المخطط",
+      frequencyLabel: "كم مرة بدك تنشر بالأسبوع؟",
+      frequencyOptions: [
+        "منشورين بالأسبوع",
+        "٣ منشورات بالأسبوع",
+        "٥ منشورات بالأسبوع",
+        "منشور كل يوم",
+        "منشورات وستوري كل يوم",
+      ],
+      otherLabel: "غير ذلك…",
+      otherPlaceholder: "اكتب إيقاعك الخاص — مثال: ٣ منشورات وستوريان بالأسبوع",
       budgetNotesLabel: "الميزانية / ملاحظات استراتيجية",
       step1BasicInfo: "1. الهدف الأساسي والنطاق",
       step2ProductsPlatforms: "2. المنتجات والمنصات",

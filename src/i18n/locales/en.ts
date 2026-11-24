@@ -346,7 +346,7 @@ export const en: Dictionary = {
       subtitle:
         "Create and track your campaigns across Instagram Professional and Facebook Pages.",
       createCampaign: "Create New Campaign",
-      createWizardTitle: "Campaign Creation Wizard (WEB-02-03)",
+      createWizardTitle: "Campaign Creation Wizard",
       createWizardSubtitle:
         "Guided step-by-step campaign setup with objective definitions, date logic, and product selection.",
       editCampaign: "Edit Campaign Details",
@@ -372,7 +372,17 @@ export const en: Dictionary = {
       endDateLabel: "End Date",
       toneLabel: "Communication Tone",
       languageLabel: "Content Language",
-      frequencyLabel: "Planned Posting Frequency",
+      frequencyLabel: "How often will you post each week?",
+      frequencyOptions: [
+        "2 posts a week",
+        "3 posts a week",
+        "5 posts a week",
+        "One post a day",
+        "Posts and stories every day",
+      ],
+      otherLabel: "Other…",
+      otherPlaceholder:
+        "Write your own rhythm — e.g. 3 carousels + 2 stories per week",
       budgetNotesLabel: "Budget / Strategic Notes",
       step1BasicInfo: "1. Core Objective & Scope",
       step2ProductsPlatforms: "2. Products & Platforms",

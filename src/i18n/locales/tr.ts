@@ -346,7 +346,7 @@ export const tr: Dictionary = {
       subtitle:
         "Instagram Professional ve Facebook Sayfalarında kampanyalarınızı oluşturun ve takip edin.",
       createCampaign: "Yeni Kampanya Oluştur",
-      createWizardTitle: "Kampanya Oluşturma Sihirbazı (WEB-02-03)",
+      createWizardTitle: "Kampanya Oluşturma Sihirbazı",
       createWizardSubtitle:
         "Hedef tanımları, tarih kuralları ve ürün seçimi ile adım adım rehberli kampanya kurulumu.",
       editCampaign: "Kampanya Detaylarını Düzenle",
@@ -372,7 +372,17 @@ export const tr: Dictionary = {
       endDateLabel: "Bitiş Tarihi",
       toneLabel: "İletişim Tonu",
       languageLabel: "İçerik Dili",
-      frequencyLabel: "Planlanan Gönderi Sıklığı",
+      frequencyLabel: "Her hafta ne sıklıkla paylaşacaksınız?",
+      frequencyOptions: [
+        "Haftada 2 gönderi",
+        "Haftada 3 gönderi",
+        "Haftada 5 gönderi",
+        "Her gün bir gönderi",
+        "Her gün gönderi ve hikaye",
+      ],
+      otherLabel: "Diğer…",
+      otherPlaceholder:
+        "Kendi düzeninizi yazın — örn. haftada 3 carousel + 2 hikaye",
       budgetNotesLabel: "Bütçe / Stratejik Notlar",
       step1BasicInfo: "1. Temel Hedef & Kapsam",
       step2ProductsPlatforms: "2. Ürünler & Platformlar",
