@@ -40,8 +40,8 @@ export function LanguageSwitcher() {
 
   return <div ref={containerRef} className="relative text-sm text-white">
     <span className="sr-only">{t('label')}</span>
-    <button type="button" onClick={() => setOpen((value) => !value)} aria-haspopup="listbox" aria-expanded={open} aria-label={t('label')} className="flex min-w-36 items-center justify-between gap-3 rounded-xl border border-white/15 bg-white/10 px-3 py-2.5 transition hover:border-accent-mint/60 focus:border-accent-mint focus:outline-none focus:ring-4 focus:ring-accent-mint/20">
-      <span className="flex items-center gap-2"><FlagIcon locale={selected.code} /><span>{t(selected.label)}</span></span>
+    <button type="button" onClick={() => setOpen((value) => !value)} aria-haspopup="listbox" aria-expanded={open} aria-label={t('label')} className="flex min-w-20 min-[420px]:min-w-36 items-center justify-between gap-2 min-[420px]:gap-3 rounded-xl border border-white/15 bg-white/10 px-2.5 min-[420px]:px-3 py-2.5 transition hover:border-accent-mint/60 focus:border-accent-mint focus:outline-none focus:ring-4 focus:ring-accent-mint/20">
+      <span className="flex items-center gap-2"><FlagIcon locale={selected.code} /><span className="hidden min-[420px]:inline">{t(selected.label)}</span></span>
       <span aria-hidden="true" className={`text-xs transition-transform ${open ? 'rotate-180' : ''}`}>⌄</span>
     </button>
     {open ? <div role="listbox" aria-label={t('label')} className="absolute end-0 top-full z-50 mt-2 min-w-44 overflow-hidden rounded-xl border border-slate-200 bg-white p-1 text-slate-700 shadow-lg">

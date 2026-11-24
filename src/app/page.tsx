@@ -94,7 +94,7 @@ export default function LandingPage() {
   return (
     <div className="landing-calm min-h-screen flex flex-col bg-navy-950 text-white relative overflow-x-hidden">
       {/* Top Navigation Header — the shared SiteNavbar (foundation component) */}
-      <header className="sticky top-0 z-40 glass-panel border-b border-white/10 px-4 py-4 sm:px-8">
+      <header className="sticky top-0 z-40 glass-panel border-b border-white/10 px-3 py-4 sm:px-8">
         <SiteNavbar />
       </header>
 

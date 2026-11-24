@@ -32,7 +32,7 @@ export function SiteNavbar() {
       <Link href="/" className="group flex items-center gap-3">
         <BrandLogo
           priority
-          className="h-10 w-10"
+          className="h-9 w-9 sm:h-10 sm:w-10"
         />
         <span className="hidden min-[480px]:block">
           <span className="block text-sm font-bold tracking-tight text-white">
@@ -56,7 +56,7 @@ export function SiteNavbar() {
         </a>
       </div>
 
-      <div className="flex items-center gap-2.5">
+      <div className="flex items-center gap-2 sm:gap-2.5">
         <LanguageSwitcher />
         <ThemeToggle />
         <Link
@@ -65,7 +65,7 @@ export function SiteNavbar() {
         >
           {isAuthenticated ? copy.openDashboard : copy.signIn}
         </Link>
-        <Link href="/dashboard" className="glass-button-primary shrink-0 whitespace-nowrap px-4 py-2 text-xs">
+        <Link href="/dashboard" className="glass-button-primary shrink-0 whitespace-nowrap px-3 py-2 text-[11px] min-[420px]:px-4 min-[420px]:text-xs">
           {copy.openDashboard}
         </Link>
       </div>
