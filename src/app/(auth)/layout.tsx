@@ -27,11 +27,11 @@ export default function AuthLayout({
   const showcase = AUTH_SHOWCASE_COPY[locale];
 
   return (
-    <div className="min-h-screen flex flex-col justify-between p-4 sm:p-6 lg:p-8 relative overflow-x-hidden">
+    <div className="workspace-calm min-h-screen flex flex-col justify-between p-4 sm:p-6 lg:p-8 relative overflow-x-hidden">
       {/* Top Header with Brand, Theme Switcher, and Language Switcher */}
       <header className="w-full max-w-7xl mx-auto flex items-center justify-between py-2 relative z-10">
         <Link href="/" className="flex items-center gap-2.5 group">
-          <BrandLogo className="w-9 h-9 shadow-glow-violet group-hover:scale-105 transition-transform" />
+          <BrandLogo className="w-9 h-9" />
           <div>
             <span className="text-sm font-bold tracking-tight text-white block">
               {t.meta.appName}

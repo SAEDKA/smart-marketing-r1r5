@@ -25,6 +25,7 @@ import { Textarea } from "@/components/ui/Textarea";
 import { Badge } from "@/components/ui/Badge";
 import {
   Sparkles,
+  PenLine,
   Instagram,
   Facebook,
   CheckCircle2,
@@ -558,8 +559,8 @@ export default function ContentStudioPage() {
               onMouseMove={handleSpotlightMove}
               className="glass-spotlight text-center p-10 sm:p-14 space-y-5"
             >
-              <div className="w-16 h-16 rounded-2xl bg-accent-violet/15 text-accent-violet border border-accent-violet/30 flex items-center justify-center mx-auto shadow-glow-violet">
-                <Sparkles className="w-8 h-8 text-accent-cyan" />
+              <div className="w-16 h-16 rounded-2xl bg-accent-violet/15 text-accent-violet border border-accent-violet/30 flex items-center justify-center mx-auto">
+                <PenLine className="w-8 h-8" />
               </div>
               <div className="space-y-2">
                 <h3 className="text-base sm:text-lg font-bold text-white">

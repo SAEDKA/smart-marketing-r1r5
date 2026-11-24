@@ -111,7 +111,7 @@ export const TopHeader = React.memo(function TopHeader({ onOpenMobileNav }: TopH
               onClick={() => showAccessNotice(noticeKindForTier(accessTier))}
               className="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-medium bg-accent-cyan/10 text-accent-cyan border border-accent-cyan/25 opacity-50"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-accent-mint animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-mint" />
               <span>{aiReadyLabel}</span>
             </button>
           ) : (
@@ -119,7 +119,7 @@ export const TopHeader = React.memo(function TopHeader({ onOpenMobileNav }: TopH
               href="/content-studio"
               className="hidden md:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-medium bg-accent-cyan/10 hover:bg-accent-cyan/20 text-accent-cyan border border-accent-cyan/25 transition-colors"
             >
-              <span className="w-1.5 h-1.5 rounded-full bg-accent-mint animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-accent-mint" />
               <span>{aiReadyLabel}</span>
             </Link>
           )}

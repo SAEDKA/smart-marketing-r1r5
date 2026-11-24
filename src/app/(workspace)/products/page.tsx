@@ -583,18 +583,10 @@ export default function ProductsPage() {
               >
                 {/* Media Preview Area */}
                 <div>
-                  <div className="relative h-48 rounded-2xl bg-gradient-to-br from-navy-900 via-navy-800 to-navy-950 border border-white/15 overflow-hidden mb-4 flex items-center justify-center text-txt-muted">
-                    <div
-                      className="absolute -top-10 -end-10 w-36 h-36 rounded-full bg-accent-violet/25 blur-2xl pointer-events-none"
-                      aria-hidden="true"
-                    />
-                    <div
-                      className="absolute -bottom-10 -start-10 w-36 h-36 rounded-full bg-accent-cyan/20 blur-2xl pointer-events-none"
-                      aria-hidden="true"
-                    />
+                  <div className="relative h-48 rounded-2xl bg-navy-900 border border-white/15 overflow-hidden mb-4 flex items-center justify-center text-txt-muted">
                     {primaryMedia ? (
                       <div className="relative z-10 w-full h-full flex flex-col items-center justify-center p-4 text-center">
-                        <div className="w-14 h-14 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center mb-2.5 shadow-glow-violet group-hover:scale-105 transition-transform">
+                        <div className="w-14 h-14 rounded-2xl bg-white/10 border border-white/15 flex items-center justify-center mb-2.5">
                           <ShoppingBag className="w-7 h-7 text-accent-cyan" />
                         </div>
                         <span className="text-xs font-semibold text-white truncate max-w-full">

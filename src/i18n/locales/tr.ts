@@ -221,7 +221,7 @@ export const tr: Dictionary = {
       reloadFromServer: "API'den Yeniden Yükle",
     },
     dashboard: {
-      welcomePrefix: "Akıllı Pazarlama Çalışma Alanı",
+      welcomePrefix: "Pazarlama Çalışma Alanı",
       workspaceSubtitle:
         "Marka kimliğinizi, ürün kataloğunuzu, yapay zeka içerik stüdyonuzu ve sosyal medya yayın sürecinizi yönetin.",
       journeyTitle: "Temel Pazarlama İş Akışı Yolculuğu",
@@ -258,7 +258,7 @@ export const tr: Dictionary = {
     products: {
       title: "Ürünler & Medya Yönetimi",
       subtitle:
-        "Ürün kataloğunuzu, medya varlıklarınızı, fiyatlandırmanızı ve kampanya bağlantılarınızı yetkili API izolasyonu ile yönetin.",
+        "Ürün kataloğunuzu, medyanızı, fiyatlarınızı ve her ürünü hangi kampanyaların kullandığını yönetin.",
       addProduct: "Yeni Ürün Ekle",
       importFromLink: "Bağlantıdan içe aktar",
       importTitle: "Bağlantıdan ürün içe aktar",
@@ -306,7 +306,7 @@ export const tr: Dictionary = {
     campaigns: {
       title: "Pazarlama Kampanyaları",
       subtitle:
-        "Tarih doğrulaması ve ürün eşleştirmesi ile Instagram Professional ve Facebook Sayfaları için hedef odaklı kampanyalar oluşturun.",
+        "Instagram Professional ve Facebook Sayfalarında kampanyalarınızı oluşturun ve takip edin.",
       createCampaign: "Yeni Kampanya Oluştur",
       createWizardTitle: "Kampanya Oluşturma Sihirbazı (WEB-02-03)",
       createWizardSubtitle:
@@ -364,7 +364,7 @@ export const tr: Dictionary = {
     studio: {
       title: "YZ İçerik Stüdyosu",
       subtitle:
-        "Eşzamansız iş durumları ile çoklu varyasyonlu pazarlama metinleri, etiketler ve görsel fikirler üretin.",
+        "Birkaç varyasyonda pazarlama metinleri, etiketler ve harekete geçirici mesajlar üretin.",
       campaignContext: "Kampanya Strateji Bağlamı",
       noCampaignsYet:
         "Henüz kampanya yok — önce Kampanyalar sayfasından oluşturun",
@@ -387,7 +387,7 @@ export const tr: Dictionary = {
       generatingBtn: "YZ Varyasyonları Üretiliyor...",
       idleStateTitle: "Kampanya İçeriği Üretmeye Hazır",
       idleStateDesc:
-        "Kampanya bağlamınızı seçin ve yüksek dönüşümlü sosyal medya metinleri üretmek için Üret'e tıklayın.",
+        "Kampanya bağlamınızı seçin ve sosyal medya metinlerinizi oluşturmak için Üret'e tıklayın.",
       queuedState: "İşlem YZ Kuyruğuna Eklendi...",
       processingState: "Yapay Zeka Modeli Yapılandırılmış Varyasyonları Oluşturuyor...",
       variantsTitle: "Üretilen İçerik Varyasyonları",

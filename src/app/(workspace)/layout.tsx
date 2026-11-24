@@ -65,13 +65,7 @@ export default function WorkspaceLayout({
         ready={!isLoading && (isAuthenticated || pathname === "/dashboard")}
       />
       {showShell ? (
-    <div className="min-h-screen flex bg-navy-950 text-white relative overflow-x-hidden">
-      {/* Ambient Liquid Glass Light Refraction Layer */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
-        <div className="ambient-glow-violet -top-32 start-1/4" />
-        <div className="ambient-glow-cyan top-1/3 -end-24" />
-        <div className="ambient-glow-violet -bottom-40 end-1/3 opacity-70" />
-      </div>
+    <div className="workspace-calm min-h-screen flex bg-navy-950 text-white relative overflow-x-hidden">
 
       {/* Desktop Glass Sidebar */}
       <GlassSidebar />

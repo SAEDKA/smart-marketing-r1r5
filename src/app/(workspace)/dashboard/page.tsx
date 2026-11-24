@@ -299,11 +299,6 @@ export default function DashboardPage() {
         onMouseMove={handleSpotlightMove}
         className="relative overflow-hidden rounded-[26px] glass-panel glass-spotlight p-6 sm:p-8"
       >
-        <div
-          className="absolute -top-24 -end-24 w-96 h-96 rounded-full bg-gradient-to-br from-accent-violet/25 via-accent-indigo/15 to-accent-cyan/20 blur-3xl pointer-events-none"
-          aria-hidden="true"
-        />
-
         <div className="relative z-10 space-y-6">
           <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
             <div className="space-y-2">

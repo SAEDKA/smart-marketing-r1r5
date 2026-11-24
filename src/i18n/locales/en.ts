@@ -221,7 +221,7 @@ export const en: Dictionary = {
       reloadFromServer: "Reload from API",
     },
     dashboard: {
-      welcomePrefix: "Intelligent Marketing Workspace",
+      welcomePrefix: "Marketing Workspace",
       workspaceSubtitle:
         "Manage your brand foundation, product catalog, AI content studio, and social publishing workflow.",
       journeyTitle: "Core Marketing Workflow Journey",
@@ -258,7 +258,7 @@ export const en: Dictionary = {
     products: {
       title: "Products & Media Workspace",
       subtitle:
-        "Manage your product catalog, media assets, pricing, and campaign associations with authorized API isolation.",
+        "Manage your product catalog, media, pricing, and which campaigns use each product.",
       addProduct: "Add Product",
       importFromLink: "Import from link",
       importTitle: "Import a product from a link",
@@ -306,7 +306,7 @@ export const en: Dictionary = {
     campaigns: {
       title: "Marketing Campaigns Workspace",
       subtitle:
-        "Orchestrate goal-driven campaigns across Instagram Professional and Facebook Pages with date validation and product alignment.",
+        "Create and track your campaigns across Instagram Professional and Facebook Pages.",
       createCampaign: "Create New Campaign",
       createWizardTitle: "Campaign Creation Wizard (WEB-02-03)",
       createWizardSubtitle:
@@ -364,7 +364,7 @@ export const en: Dictionary = {
     studio: {
       title: "AI Content Studio",
       subtitle:
-        "Generate multi-variant marketing copy, hashtags, CTAs, and visual ideas with asynchronous job states.",
+        "Generate marketing copy in several variants, with hashtags and calls to action.",
       campaignContext: "Campaign Strategy Context",
       noCampaignsYet:
         "No campaigns yet — create one from the Campaigns page first",
@@ -387,7 +387,7 @@ export const en: Dictionary = {
       generatingBtn: "Generating AI Variations...",
       idleStateTitle: "Ready to Generate Campaign Content",
       idleStateDesc:
-        "Select your campaign context and click Generate to produce high-converting social media copy.",
+        "Select your campaign context and click Generate to create your social media copy.",
       queuedState: "Job Queued in AI Dispatcher...",
       processingState: "AI Model Preparing Your Variations...",
       variantsTitle: "Generated Content Variations",

@@ -680,74 +680,77 @@
 }
 
 /* Landing calm pass (unslop) — landing page only.
-   The landing root carries .landing-calm; inside it the glass
+   The landing root carries :is(.landing-calm, .workspace-calm); inside it the glass
    surfaces become solid raised surfaces, the primary button loses
    its hue gradient and colored shadow, glows and the cursor
    spotlight are switched off, and the one gradient icon tile goes
    solid. Workspace and auth screens keep the Liquid Glass system
-   untouched. Remove the .landing-calm class from the landing root
+   untouched. Remove the :is(.landing-calm, .workspace-calm) class from the landing root
    to undo the whole pass. */
-.landing-calm .glass-panel,
-.landing-calm .glass-card,
-.landing-calm .glass-card-interactive {
+:is(.landing-calm, .workspace-calm) .glass-panel,
+:is(.landing-calm, .workspace-calm) .glass-card,
+:is(.landing-calm, .workspace-calm) .glass-card-interactive {
   background: var(--bg-surface);
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
   border-color: rgb(255 255 255 / 0.1);
   box-shadow: 0 18px 40px -22px rgb(3 6 10 / 0.6);
 }
-.landing-calm .glass-card-interactive:hover {
+:is(.landing-calm, .workspace-calm) .glass-card-interactive:hover {
   transform: none;
   border-color: rgb(255 255 255 / 0.22);
   box-shadow: 0 18px 40px -22px rgb(3 6 10 / 0.6);
 }
-.landing-calm .glass-spotlight::before {
+:is(.landing-calm, .workspace-calm) .glass-spotlight::before {
   display: none;
 }
-.landing-calm .glass-button-primary {
+:is(.landing-calm, .workspace-calm) .glass-button-primary {
   background: var(--accent-violet);
   border-color: transparent;
   box-shadow: none;
 }
-.landing-calm .glass-button-primary:hover:not(:disabled) {
+:is(.landing-calm, .workspace-calm) .glass-button-primary:hover:not(:disabled) {
   background: var(--accent-indigo);
   box-shadow: none;
   filter: none;
   transform: none;
 }
-.landing-calm .glass-button-secondary {
+:is(.landing-calm, .workspace-calm) .glass-button-secondary {
   background: rgb(255 255 255 / 0.04);
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
   box-shadow: none;
 }
-.landing-calm .glass-button-secondary:hover:not(:disabled) {
+:is(.landing-calm, .workspace-calm) .glass-button-secondary:hover:not(:disabled) {
   transform: none;
 }
-.landing-calm .shadow-glow-violet,
-.landing-calm .shadow-glow-cyan {
+:is(.landing-calm, .workspace-calm) .shadow-glow-violet,
+:is(.landing-calm, .workspace-calm) .shadow-glow-cyan {
   box-shadow: none;
 }
-.landing-calm .bg-gradient-to-tr {
+:is(.landing-calm, .workspace-calm) [class*="shadow-glow-"] {
+  box-shadow: none;
+}
+:is(.landing-calm, .workspace-calm) .bg-gradient-to-tr {
   background-image: none;
   background-color: var(--accent-violet);
 }
-[data-theme="light"] .landing-calm .glass-panel,
-[data-theme="light"] .landing-calm .glass-card,
-[data-theme="light"] .landing-calm .glass-card-interactive {
+[data-theme="light"] :is(.landing-calm, .workspace-calm) .glass-panel,
+[data-theme="light"] :is(.landing-calm, .workspace-calm) .glass-card,
+[data-theme="light"] :is(.landing-calm, .workspace-calm) .glass-card-interactive {
   background: #ffffff;
   border-color: rgb(19 34 44 / 0.1);
   box-shadow: 0 18px 40px -24px rgb(19 34 44 / 0.22);
 }
-[data-theme="light"] .landing-calm .glass-card-interactive:hover {
+[data-theme="light"] :is(.landing-calm, .workspace-calm) .glass-card-interactive:hover {
   border-color: rgb(19 34 44 / 0.2);
 }
-[data-theme="light"] .landing-calm .glass-button-primary {
+[data-theme="light"] :is(.landing-calm, .workspace-calm) .glass-button-primary {
   background: var(--accent-violet);
 }
-[data-theme="light"] .landing-calm .glass-button-primary:hover:not(:disabled) {
+[data-theme="light"] :is(.landing-calm, .workspace-calm) .glass-button-primary:hover:not(:disabled) {
   background: var(--accent-indigo);
 }
-[data-theme="light"] .landing-calm .glass-button-secondary {
+[data-theme="light"] :is(.landing-calm, .workspace-calm) .glass-button-secondary {
   background: rgb(19 34 44 / 0.03);
 }
