@@ -359,8 +359,15 @@ export interface Dictionary {
     budgetLabel: string;
     budgetPlaceholder: string;
     currencySymbol: string;
-    durationLabel: string;
-    durationOptions: string[];
+    startDateLabel: string;
+    endDateLabel: string;
+    daysLabel: string;
+    estimateTitle: string;
+    estimateAudienceLabel: string;
+    estimateReachLabel: string;
+    estimateEngagementLabel: string;
+    estimateDaysLabel: string;
+    estimateNote: string;
     platformsLabel: string;
     instagramDesc: string;
     facebookDesc: string;

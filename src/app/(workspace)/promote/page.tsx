@@ -15,6 +15,7 @@ import {
   Facebook,
   CheckCircle2,
   Clock,
+  Users,
 } from "lucide-react";
 
 // Numbered step title — same visual style as the Content Studio steps.
@@ -61,8 +62,32 @@ function LabeledSelect({
 // Fixed option codes; the visible labels come from the locale by index,
 // so switching language keeps the same choice.
 const RADIUS_CODES = ["5", "10", "20", "50", "ALL"];
-const DURATION_CODES = ["3", "7", "14", "30"];
 const AGES = Array.from({ length: 48 }, (_, i) => 18 + i); // 18..65
+
+// Social-media audience per country, in the same order as the locale's
+// countries list — the base of the reach estimate below.
+const COUNTRY_AUDIENCE = [
+  52_000_000, 38_000_000, 9_000_000, 3_500_000, 3_000_000, 3_200_000,
+];
+const RADIUS_FACTORS = [0.02, 0.05, 0.12, 0.3, 1]; // same order as RADIUS_CODES
+
+// Round an estimate the way ad platforms do: two significant digits.
+function roundNice(n: number): number {
+  if (n <= 0) return 0;
+  const step = Math.pow(10, Math.max(0, Math.floor(Math.log10(n)) - 1));
+  return Math.round(n / step) * step;
+}
+
+function fmtDate(iso: string): string {
+  const d = new Date(`${iso}T00:00:00`);
+  return Number.isNaN(d.getTime()) ? iso : d.toLocaleDateString("en-GB");
+}
+
+function todayPlus(days: number): string {
+  const d = new Date();
+  d.setDate(d.getDate() + days);
+  return d.toISOString().slice(0, 10);
+}
 
 type LaunchStatus = "idle" | "review" | "active";
 
@@ -87,9 +112,11 @@ export default function PromotePage() {
   const [radius, setRadius] = useState("10");
   const [interests, setInterests] = useState<string[]>([]);
 
-  // Step 3 — budget, duration, platforms.
+  // Step 3 — budget, dates, platforms. The user picks the exact start
+  // and end dates; the length in days is derived from them.
   const [budget, setBudget] = useState("500");
-  const [duration, setDuration] = useState("7");
+  const [startDate, setStartDate] = useState(() => todayPlus(0));
+  const [endDate, setEndDate] = useState(() => todayPlus(7));
   const [platforms, setPlatforms] = useState<SocialPlatform[]>([
     "INSTAGRAM",
     "FACEBOOK",
@@ -167,9 +194,39 @@ export default function PromotePage() {
   const audienceSummary = `${ageFrom}–${ageTo} • ${genderLabel} • ${
     city ? `${city}، ` : ""
   }${t.promote.countries[countryIndex]}`;
-  const durationLabel =
-    t.promote.durationOptions[DURATION_CODES.indexOf(duration)];
-  const budgetSummary = `${budget} ${t.promote.currencySymbol} • ${durationLabel}`;
+  const durationDays = Math.max(
+    1,
+    Math.round((Date.parse(endDate) - Date.parse(startDate)) / 86_400_000) + 1
+  );
+  const budgetSummary = `${budget} ${t.promote.currencySymbol} • ${fmtDate(
+    startDate
+  )} – ${fmtDate(endDate)}`;
+
+  // Live estimates, the way Meta shows them: the audience size comes from
+  // the targeting alone; the reach also depends on the daily budget.
+  const audienceSize = Math.max(
+    1000,
+    Math.round(
+      COUNTRY_AUDIENCE[countryIndex] *
+        ((ageTo - ageFrom + 1) / AGES.length) *
+        (gender === "ALL" ? 1 : 0.5) *
+        RADIUS_FACTORS[RADIUS_CODES.indexOf(radius)] *
+        (interests.length === 0
+          ? 1
+          : Math.max(0.2, 1 - 0.18 * interests.length))
+    )
+  );
+  const platformFactor =
+    platforms.length === 2 ? 1.6 : platforms.length === 1 ? 1 : 0;
+  const reachTotal = Math.min(
+    audienceSize * 0.9,
+    (budgetNumber / durationDays) * 55 * durationDays * platformFactor
+  );
+  const reachLow = roundNice(reachTotal * 0.7);
+  const reachHigh = roundNice(reachTotal * 1.15);
+  const engagementLow = roundNice(reachTotal * 0.02);
+  const engagementHigh = roundNice(reachTotal * 0.045);
+  const fmtNum = (n: number) => n.toLocaleString("en-US");
   const platformsSummary = platforms
     .map((p) => (p === "INSTAGRAM" ? "Instagram" : "Facebook"))
     .join(" • ");
@@ -336,7 +393,7 @@ export default function PromotePage() {
           <div className="space-y-4 pt-5 border-t border-white/10">
             <StepTitle n={3}>{t.promote.step3Title}</StepTitle>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <Input
                 label={`${t.promote.budgetLabel} (${t.promote.currencySymbol})`}
                 type="number"
@@ -346,17 +403,20 @@ export default function PromotePage() {
                 onChange={(e) => setBudget(e.target.value)}
               />
 
-              <LabeledSelect
-                label={t.promote.durationLabel}
-                value={duration}
-                onChange={setDuration}
-              >
-                {DURATION_CODES.map((code, i) => (
-                  <option key={code} value={code}>
-                    {t.promote.durationOptions[i]}
-                  </option>
-                ))}
-              </LabeledSelect>
+              <Input
+                label={t.promote.startDateLabel}
+                type="date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+              />
+
+              <Input
+                label={t.promote.endDateLabel}
+                type="date"
+                min={startDate}
+                value={endDate}
+                onChange={(e) => setEndDate(e.target.value)}
+              />
             </div>
 
             <div>
@@ -422,6 +482,51 @@ export default function PromotePage() {
               </Button>
             )}
           </div>
+        </Card>
+
+        {/* Live estimates — they move as the user edits the form */}
+        <Card className="surface-card p-5 space-y-3">
+          <p className="text-xs font-bold text-white flex items-center gap-2">
+            <Users className="w-4 h-4 text-accent-cyan" />
+            {t.promote.estimateTitle}
+          </p>
+          <div className="space-y-2 text-xs">
+            <div className="flex items-center justify-between gap-4">
+              <span className="text-txt-muted">
+                {t.promote.estimateAudienceLabel}
+              </span>
+              <strong className="text-white text-end">
+                {fmtNum(audienceSize)}
+              </strong>
+            </div>
+            <div className="flex items-center justify-between gap-4">
+              <span className="text-txt-muted">
+                {t.promote.estimateReachLabel}
+              </span>
+              <strong className="text-white text-end">
+                {fmtNum(reachLow)} – {fmtNum(reachHigh)}
+              </strong>
+            </div>
+            <div className="flex items-center justify-between gap-4">
+              <span className="text-txt-muted">
+                {t.promote.estimateEngagementLabel}
+              </span>
+              <strong className="text-white text-end">
+                {fmtNum(engagementLow)} – {fmtNum(engagementHigh)}
+              </strong>
+            </div>
+            <div className="flex items-center justify-between gap-4">
+              <span className="text-txt-muted">
+                {t.promote.estimateDaysLabel}
+              </span>
+              <strong className="text-white text-end">
+                {durationDays} {t.promote.daysLabel}
+              </strong>
+            </div>
+          </div>
+          <p className="text-[11px] leading-relaxed text-txt-muted">
+            {t.promote.estimateNote}
+          </p>
         </Card>
 
         {/* Summary + the one big launch button — or the launch result */}
