@@ -512,40 +512,62 @@ export default function ContentStudioPage() {
                 <label className="block text-xs font-medium text-txt-secondary mb-1.5">
                   {t.studio.toneSelect}
                 </label>
-                <select
-                  value={selectedTone}
-                  onChange={(e) =>
-                    setSelectedTone(e.target.value as CommunicationTone)
-                  }
-                  className="field-input w-full h-10 px-3 text-xs text-white bg-navy-900 focus:outline-none"
-                >
-                  <option value="LUXURY">{t.onboarding.tones.LUXURY}</option>
-                  <option value="PROFESSIONAL">
-                    {t.onboarding.tones.PROFESSIONAL}
-                  </option>
-                  <option value="FRIENDLY">{t.onboarding.tones.FRIENDLY}</option>
-                  <option value="BOLD">{t.onboarding.tones.BOLD}</option>
-                  <option value="EDUCATIONAL">
-                    {t.onboarding.tones.EDUCATIONAL}
-                  </option>
-                </select>
+                {/* Segmented box — same control as Brand/Campaigns:
+                    no native dropdown, no browser-blue popup. */}
+                <div className="flex flex-wrap gap-1 rounded-2xl border border-white/10 bg-white/5 p-1">
+                  {(
+                    [
+                      ["LUXURY", t.onboarding.tones.LUXURY],
+                      ["PROFESSIONAL", t.onboarding.tones.PROFESSIONAL],
+                      ["FRIENDLY", t.onboarding.tones.FRIENDLY],
+                      ["BOLD", t.onboarding.tones.BOLD],
+                      ["EDUCATIONAL", t.onboarding.tones.EDUCATIONAL],
+                    ] as [CommunicationTone, string][]
+                  ).map(([value, label]) => (
+                    <button
+                      key={value}
+                      type="button"
+                      onClick={() => setSelectedTone(value)}
+                      aria-pressed={selectedTone === value}
+                      className={`flex-1 px-3 py-2 rounded-xl text-xs whitespace-nowrap transition-all ${
+                        selectedTone === value
+                          ? "bg-accent-violet text-white font-semibold"
+                          : "text-txt-secondary hover:text-white"
+                      }`}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
               </div>
 
               <div>
                 <label className="block text-xs font-medium text-txt-secondary mb-1.5">
                   {t.studio.languageSelect}
                 </label>
-                <select
-                  value={selectedLanguage}
-                  onChange={(e) =>
-                    setSelectedLanguage(e.target.value as ContentLanguage)
-                  }
-                  className="field-input w-full h-10 px-3 text-xs text-white bg-navy-900 focus:outline-none"
-                >
-                  <option value="en">English (en)</option>
-                  <option value="tr">Türkçe (tr)</option>
-                  <option value="ar">العربية (ar)</option>
-                </select>
+                <div className="flex flex-wrap gap-1 rounded-2xl border border-white/10 bg-white/5 p-1">
+                  {(
+                    [
+                      ["en", "English"],
+                      ["tr", "Türkçe"],
+                      ["ar", "العربية"],
+                    ] as [ContentLanguage, string][]
+                  ).map(([code, label]) => (
+                    <button
+                      key={code}
+                      type="button"
+                      onClick={() => setSelectedLanguage(code)}
+                      aria-pressed={selectedLanguage === code}
+                      className={`flex-1 px-3 py-2 rounded-xl text-xs whitespace-nowrap transition-all ${
+                        selectedLanguage === code
+                          ? "bg-accent-violet text-white font-semibold"
+                          : "text-txt-secondary hover:text-white"
+                      }`}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
               </div>
             </div>
               </div>

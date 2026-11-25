@@ -308,7 +308,7 @@ export default function BrandSettingsPage() {
               {/* Tappable chips in the interface language — a native select
                   shows raw English enum names and a browser-blue popup
                   that clashes with the theme. */}
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-1 rounded-2xl border border-white/10 bg-white/5 p-1">
                 {(
                   [
                     ["PROFESSIONAL", t.onboarding.tones.PROFESSIONAL],
@@ -323,10 +323,10 @@ export default function BrandSettingsPage() {
                     type="button"
                     onClick={() => setCommunicationTone(value)}
                     aria-pressed={communicationTone === value}
-                    className={`px-3 py-1.5 rounded-full border text-xs transition-all ${
+                    className={`flex-1 px-3 py-2 rounded-xl text-xs whitespace-nowrap transition-all ${
                       communicationTone === value
-                        ? "bg-accent-violet/20 border-accent-violet text-white font-semibold"
-                        : "bg-white/5 border-white/10 text-txt-secondary hover:text-white"
+                        ? "bg-accent-violet text-white font-semibold"
+                        : "text-txt-secondary hover:text-white"
                     }`}
                   >
                     {label}
@@ -350,7 +350,7 @@ export default function BrandSettingsPage() {
             <label className="block text-xs font-medium text-txt-secondary">
               {t.brand.preferredLanguage}
             </label>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-1 rounded-2xl border border-white/10 bg-white/5 p-1">
               {[
                 { code: "en", label: "English" },
                 { code: "tr", label: "Türkçe" },
@@ -361,10 +361,10 @@ export default function BrandSettingsPage() {
                   type="button"
                   onClick={() => setPreferredLanguage(item.code as ContentLanguage)}
                   aria-pressed={preferredLanguage === item.code}
-                  className={`px-4 py-2 rounded-full border text-xs transition-all ${
+                  className={`flex-1 px-4 py-2 rounded-xl text-xs whitespace-nowrap transition-all ${
                     preferredLanguage === item.code
-                      ? "bg-accent-violet/20 border-accent-violet text-white font-semibold"
-                      : "bg-white/5 border-white/10 text-txt-secondary hover:text-white"
+                      ? "bg-accent-violet text-white font-semibold"
+                      : "text-txt-secondary hover:text-white"
                   }`}
                 >
                   {item.label}

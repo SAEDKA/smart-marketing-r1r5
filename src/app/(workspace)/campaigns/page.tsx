@@ -901,9 +901,9 @@ export default function CampaignsPage() {
                   <label className="block text-xs font-medium text-txt-secondary mb-1.5">
                     {t.campaigns.languageLabel}
                   </label>
-                  {/* Name-only chips: a native select shows language codes
-                      and a browser-blue popup that clashes with the theme. */}
-                  <div className="flex flex-wrap gap-2">
+                  {/* Segmented box, name-only: a native select shows
+                      language codes and a browser-blue popup. */}
+                  <div className="flex flex-wrap gap-1 rounded-2xl border border-white/10 bg-white/5 p-1">
                     {(
                       [
                         ["en", "English"],
@@ -916,10 +916,10 @@ export default function CampaignsPage() {
                         type="button"
                         onClick={() => setContentLanguage(code)}
                         aria-pressed={contentLanguage === code}
-                        className={`px-4 py-2 rounded-full border text-xs transition-all ${
+                        className={`flex-1 px-3 py-2 rounded-xl text-xs whitespace-nowrap transition-all ${
                           contentLanguage === code
-                            ? "bg-accent-violet/20 border-accent-violet text-white font-semibold"
-                            : "bg-white/5 border-white/10 text-txt-secondary hover:text-white"
+                            ? "bg-accent-violet text-white font-semibold"
+                            : "text-txt-secondary hover:text-white"
                         }`}
                       >
                         {label}
@@ -932,9 +932,9 @@ export default function CampaignsPage() {
                   <label className="block text-xs font-medium text-txt-secondary mb-1.5">
                     {t.campaigns.toneLabel}
                   </label>
-                  {/* Localized tappable chips — same fix as Brand settings:
-                      no raw English enum names, no browser-blue popup. */}
-                  <div className="flex flex-wrap gap-2">
+                  {/* Segmented box with localized tone names — same fix
+                      as Brand settings: no English enum, no blue popup. */}
+                  <div className="flex flex-wrap gap-1 rounded-2xl border border-white/10 bg-white/5 p-1">
                     {(
                       [
                         ["PROFESSIONAL", t.onboarding.tones.PROFESSIONAL],
@@ -949,10 +949,10 @@ export default function CampaignsPage() {
                         type="button"
                         onClick={() => setCommunicationTone(value)}
                         aria-pressed={communicationTone === value}
-                        className={`px-3 py-1.5 rounded-full border text-xs transition-all ${
+                        className={`flex-1 px-3 py-2 rounded-xl text-xs whitespace-nowrap transition-all ${
                           communicationTone === value
-                            ? "bg-accent-violet/20 border-accent-violet text-white font-semibold"
-                            : "bg-white/5 border-white/10 text-txt-secondary hover:text-white"
+                            ? "bg-accent-violet text-white font-semibold"
+                            : "text-txt-secondary hover:text-white"
                         }`}
                       >
                         {label}
@@ -968,7 +968,7 @@ export default function CampaignsPage() {
                 </label>
                 {/* Ready-made rhythms to tap, with an "Other" escape —
                     a blank box with an English example helped nobody. */}
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1 rounded-2xl border border-white/10 bg-white/5 p-1">
                   {t.campaigns.frequencyOptions.map((option) => (
                     <button
                       key={option}
@@ -980,10 +980,10 @@ export default function CampaignsPage() {
                       aria-pressed={
                         publishingFrequency === option && !freqOtherOpen
                       }
-                      className={`px-3 py-1.5 rounded-full border text-xs transition-all ${
+                      className={`flex-1 px-3 py-2 rounded-xl text-xs whitespace-nowrap transition-all ${
                         publishingFrequency === option && !freqOtherOpen
-                          ? "bg-accent-violet/20 border-accent-violet text-white font-semibold"
-                          : "bg-white/5 border-white/10 text-txt-secondary hover:text-white"
+                          ? "bg-accent-violet text-white font-semibold"
+                          : "text-txt-secondary hover:text-white"
                       }`}
                     >
                       {option}
@@ -1008,14 +1008,14 @@ export default function CampaignsPage() {
                           publishingFrequency
                         ))
                     }
-                    className={`px-3 py-1.5 rounded-full border border-dashed text-xs transition-all ${
+                    className={`flex-1 px-3 py-2 rounded-xl text-xs whitespace-nowrap transition-all ${
                       freqOtherOpen ||
                       (publishingFrequency !== "" &&
                         !t.campaigns.frequencyOptions.includes(
                           publishingFrequency
                         ))
-                        ? "bg-accent-violet/20 border-accent-violet text-white font-semibold"
-                        : "bg-white/5 border-white/10 text-txt-secondary hover:text-white"
+                        ? "bg-accent-violet text-white font-semibold"
+                        : "text-txt-secondary hover:text-white"
                     }`}
                   >
                     {t.campaigns.otherLabel}
