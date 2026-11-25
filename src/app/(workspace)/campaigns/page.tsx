@@ -94,7 +94,6 @@ export default function CampaignsPage() {
   const [contentLanguage, setContentLanguage] = useState<ContentLanguage>("en");
   const [communicationTone, setCommunicationTone] = useState<CommunicationTone>("LUXURY");
   const [publishingFrequency, setPublishingFrequency] = useState("3 posts/week");
-  const [freqOtherOpen, setFreqOtherOpen] = useState(false);
   const [budgetNotes, setBudgetNotes] = useState("");
 
   // Load Campaigns and Products
@@ -901,9 +900,13 @@ export default function CampaignsPage() {
                   <label className="block text-xs font-medium text-txt-secondary mb-1.5">
                     {t.campaigns.languageLabel}
                   </label>
-                  {/* Segmented box, name-only: a native select shows
-                      language codes and a browser-blue popup. */}
-                  <div className="flex flex-wrap gap-1 rounded-2xl border border-white/10 bg-white/5 p-1">
+                  <select
+                    value={contentLanguage}
+                    onChange={(e) =>
+                      setContentLanguage(e.target.value as ContentLanguage)
+                    }
+                    className="field-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
+                  >
                     {(
                       [
                         ["en", "English"],
@@ -911,30 +914,24 @@ export default function CampaignsPage() {
                         ["ar", "العربية"],
                       ] as [ContentLanguage, string][]
                     ).map(([code, label]) => (
-                      <button
-                        key={code}
-                        type="button"
-                        onClick={() => setContentLanguage(code)}
-                        aria-pressed={contentLanguage === code}
-                        className={`flex-1 px-3 py-2 rounded-xl text-xs whitespace-nowrap transition-all ${
-                          contentLanguage === code
-                            ? "bg-accent-violet text-white font-semibold"
-                            : "text-txt-secondary hover:text-white"
-                        }`}
-                      >
+                      <option key={code} value={code}>
                         {label}
-                      </button>
+                      </option>
                     ))}
-                  </div>
+                  </select>
                 </div>
 
                 <div>
                   <label className="block text-xs font-medium text-txt-secondary mb-1.5">
                     {t.campaigns.toneLabel}
                   </label>
-                  {/* Segmented box with localized tone names — same fix
-                      as Brand settings: no English enum, no blue popup. */}
-                  <div className="flex flex-wrap gap-1 rounded-2xl border border-white/10 bg-white/5 p-1">
+                  <select
+                    value={communicationTone}
+                    onChange={(e) =>
+                      setCommunicationTone(e.target.value as CommunicationTone)
+                    }
+                    className="field-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
+                  >
                     {(
                       [
                         ["PROFESSIONAL", t.onboarding.tones.PROFESSIONAL],
@@ -944,21 +941,11 @@ export default function CampaignsPage() {
                         ["EDUCATIONAL", t.onboarding.tones.EDUCATIONAL],
                       ] as [CommunicationTone, string][]
                     ).map(([value, label]) => (
-                      <button
-                        key={value}
-                        type="button"
-                        onClick={() => setCommunicationTone(value)}
-                        aria-pressed={communicationTone === value}
-                        className={`flex-1 px-3 py-2 rounded-xl text-xs whitespace-nowrap transition-all ${
-                          communicationTone === value
-                            ? "bg-accent-violet text-white font-semibold"
-                            : "text-txt-secondary hover:text-white"
-                        }`}
-                      >
+                      <option key={value} value={value}>
                         {label}
-                      </button>
+                      </option>
                     ))}
-                  </div>
+                  </select>
                 </div>
               </div>
 
@@ -966,75 +953,26 @@ export default function CampaignsPage() {
                 <label className="block text-xs font-medium text-txt-secondary mb-1.5">
                   {t.campaigns.frequencyLabel}
                 </label>
-                {/* Ready-made rhythms to tap, with an "Other" escape —
-                    a blank box with an English example helped nobody. */}
-                <div className="flex flex-wrap gap-1 rounded-2xl border border-white/10 bg-white/5 p-1">
+                {/* Ready-made rhythms in a dropdown — a blank box with an
+                    English example helped nobody. A previously saved custom
+                    text stays as its own option, so nothing is lost. */}
+                <select
+                  value={publishingFrequency}
+                  onChange={(e) => setPublishingFrequency(e.target.value)}
+                  className="field-input w-full h-11 px-3 text-xs text-white bg-navy-900 focus:outline-none"
+                >
                   {t.campaigns.frequencyOptions.map((option) => (
-                    <button
-                      key={option}
-                      type="button"
-                      onClick={() => {
-                        setPublishingFrequency(option);
-                        setFreqOtherOpen(false);
-                      }}
-                      aria-pressed={
-                        publishingFrequency === option && !freqOtherOpen
-                      }
-                      className={`flex-1 px-3 py-2 rounded-xl text-xs whitespace-nowrap transition-all ${
-                        publishingFrequency === option && !freqOtherOpen
-                          ? "bg-accent-violet text-white font-semibold"
-                          : "text-txt-secondary hover:text-white"
-                      }`}
-                    >
+                    <option key={option} value={option}>
                       {option}
-                    </button>
+                    </option>
                   ))}
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setFreqOtherOpen(true);
-                      if (
-                        t.campaigns.frequencyOptions.includes(
-                          publishingFrequency
-                        )
-                      ) {
-                        setPublishingFrequency("");
-                      }
-                    }}
-                    aria-pressed={
-                      freqOtherOpen ||
-                      (publishingFrequency !== "" &&
-                        !t.campaigns.frequencyOptions.includes(
-                          publishingFrequency
-                        ))
-                    }
-                    className={`flex-1 px-3 py-2 rounded-xl text-xs whitespace-nowrap transition-all ${
-                      freqOtherOpen ||
-                      (publishingFrequency !== "" &&
-                        !t.campaigns.frequencyOptions.includes(
-                          publishingFrequency
-                        ))
-                        ? "bg-accent-violet text-white font-semibold"
-                        : "text-txt-secondary hover:text-white"
-                    }`}
-                  >
-                    {t.campaigns.otherLabel}
-                  </button>
-                </div>
-                {(freqOtherOpen ||
-                  (publishingFrequency !== "" &&
-                    !t.campaigns.frequencyOptions.includes(
-                      publishingFrequency
-                    ))) && (
-                  <div className="mt-2">
-                    <Input
-                      aria-label={t.campaigns.frequencyLabel}
-                      placeholder={t.campaigns.otherPlaceholder}
-                      value={publishingFrequency}
-                      onChange={(e) => setPublishingFrequency(e.target.value)}
-                    />
-                  </div>
-                )}
+                  {publishingFrequency !== "" &&
+                    !t.campaigns.frequencyOptions.includes(publishingFrequency) && (
+                      <option value={publishingFrequency}>
+                        {publishingFrequency}
+                      </option>
+                    )}
+                </select>
               </div>
             </div>
           )}

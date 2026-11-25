@@ -305,10 +305,15 @@ export default function BrandSettingsPage() {
               <label className="block text-xs font-medium text-txt-secondary mb-1.5">
                 {t.brand.communicationTone}
               </label>
-              {/* Tappable chips in the interface language — a native select
-                  shows raw English enum names and a browser-blue popup
-                  that clashes with the theme. */}
-              <div className="flex flex-wrap gap-1 rounded-2xl border border-white/10 bg-white/5 p-1">
+              {/* Dropdown with localized tone names — one compact box that
+                  shows only the chosen value (Saeed’s choice). */}
+              <select
+                value={communicationTone}
+                onChange={(e) =>
+                  setCommunicationTone(e.target.value as CommunicationTone)
+                }
+                className="field-input w-full h-11 px-4 text-sm text-white bg-navy-900 focus:outline-none"
+              >
                 {(
                   [
                     ["PROFESSIONAL", t.onboarding.tones.PROFESSIONAL],
@@ -318,21 +323,11 @@ export default function BrandSettingsPage() {
                     ["EDUCATIONAL", t.onboarding.tones.EDUCATIONAL],
                   ] as [CommunicationTone, string][]
                 ).map(([value, label]) => (
-                  <button
-                    key={value}
-                    type="button"
-                    onClick={() => setCommunicationTone(value)}
-                    aria-pressed={communicationTone === value}
-                    className={`flex-1 px-3 py-2 rounded-xl text-xs whitespace-nowrap transition-all ${
-                      communicationTone === value
-                        ? "bg-accent-violet text-white font-semibold"
-                        : "text-txt-secondary hover:text-white"
-                    }`}
-                  >
+                  <option key={value} value={value}>
                     {label}
-                  </button>
+                  </option>
                 ))}
-              </div>
+              </select>
             </div>
           </div>
 
@@ -350,27 +345,25 @@ export default function BrandSettingsPage() {
             <label className="block text-xs font-medium text-txt-secondary">
               {t.brand.preferredLanguage}
             </label>
-            <div className="flex flex-wrap gap-1 rounded-2xl border border-white/10 bg-white/5 p-1">
-              {[
-                { code: "en", label: "English" },
-                { code: "tr", label: "Türkçe" },
-                { code: "ar", label: "العربية" },
-              ].map((item) => (
-                <button
-                  key={item.code}
-                  type="button"
-                  onClick={() => setPreferredLanguage(item.code as ContentLanguage)}
-                  aria-pressed={preferredLanguage === item.code}
-                  className={`flex-1 px-4 py-2 rounded-xl text-xs whitespace-nowrap transition-all ${
-                    preferredLanguage === item.code
-                      ? "bg-accent-violet text-white font-semibold"
-                      : "text-txt-secondary hover:text-white"
-                  }`}
-                >
-                  {item.label}
-                </button>
+            <select
+              value={preferredLanguage}
+              onChange={(e) =>
+                setPreferredLanguage(e.target.value as ContentLanguage)
+              }
+              className="field-input w-full h-11 px-4 text-sm text-white bg-navy-900 focus:outline-none"
+            >
+              {(
+                [
+                  ["en", "English"],
+                  ["tr", "Türkçe"],
+                  ["ar", "العربية"],
+                ] as [ContentLanguage, string][]
+              ).map(([code, label]) => (
+                <option key={code} value={code}>
+                  {label}
+                </option>
               ))}
-            </div>
+            </select>
           </div>
 
           <div className="border-t border-white/10 pt-6 space-y-4">

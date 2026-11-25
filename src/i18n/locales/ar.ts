@@ -377,8 +377,6 @@ export const ar: Dictionary = {
         "منشور كل يوم",
         "منشورات وستوري كل يوم",
       ],
-      otherLabel: "غير ذلك…",
-      otherPlaceholder: "اكتب إيقاعك الخاص — مثال: ٣ منشورات وستوريان بالأسبوع",
       budgetNotesLabel: "الميزانية / ملاحظات استراتيجية",
       step1BasicInfo: "1. الهدف الأساسي والنطاق",
       step2ProductsPlatforms: "2. المنتجات والمنصات",

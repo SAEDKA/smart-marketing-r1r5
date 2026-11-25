@@ -308,8 +308,6 @@ export interface Dictionary {
     languageLabel: string;
     frequencyLabel: string;
     frequencyOptions: string[];
-    otherLabel: string;
-    otherPlaceholder: string;
     budgetNotesLabel: string;
     step1BasicInfo: string;
     step2ProductsPlatforms: string;

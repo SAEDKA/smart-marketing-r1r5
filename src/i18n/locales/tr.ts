@@ -380,9 +380,6 @@ export const tr: Dictionary = {
         "Her gün bir gönderi",
         "Her gün gönderi ve hikaye",
       ],
-      otherLabel: "Diğer…",
-      otherPlaceholder:
-        "Kendi düzeninizi yazın — örn. haftada 3 carousel + 2 hikaye",
       budgetNotesLabel: "Bütçe / Stratejik Notlar",
       step1BasicInfo: "1. Temel Hedef & Kapsam",
       step2ProductsPlatforms: "2. Ürünler & Platformlar",

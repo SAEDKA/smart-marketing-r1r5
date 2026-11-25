@@ -380,9 +380,6 @@ export const en: Dictionary = {
         "One post a day",
         "Posts and stories every day",
       ],
-      otherLabel: "Other…",
-      otherPlaceholder:
-        "Write your own rhythm — e.g. 3 carousels + 2 stories per week",
       budgetNotesLabel: "Budget / Strategic Notes",
       step1BasicInfo: "1. Core Objective & Scope",
       step2ProductsPlatforms: "2. Products & Platforms",
