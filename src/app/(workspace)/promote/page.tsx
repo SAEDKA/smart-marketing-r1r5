@@ -71,6 +71,17 @@ const COUNTRY_AUDIENCE = [
 ];
 const RADIUS_FACTORS = [0.02, 0.05, 0.12, 0.3, 1]; // same order as RADIUS_CODES
 
+// Expected-result rate per goal (same order as the locale's
+// objectiveOptions): impressions per reached person for awareness,
+// then clicks, engagement, chats and orders as a share of the reach.
+const RESULT_RATES: [number, number][] = [
+  [2.2, 3],
+  [0.01, 0.025],
+  [0.02, 0.045],
+  [0.005, 0.012],
+  [0.003, 0.008],
+];
+
 // Round an estimate the way ad platforms do: two significant digits.
 function roundNice(n: number): number {
   if (n <= 0) return 0;
@@ -99,9 +110,12 @@ export default function PromotePage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Step 1 — what to promote.
+  // Step 1 — the goal, what to promote, and where the ad sends people.
+  const [objectiveIndex, setObjectiveIndex] = useState(2);
   const [campaignId, setCampaignId] = useState("");
   const [productId, setProductId] = useState("");
+  const [ctaIndex, setCtaIndex] = useState(2);
+  const [destination, setDestination] = useState("");
 
   // Step 2 — who should see it.
   const [ageFrom, setAgeFrom] = useState(24);
@@ -121,6 +135,8 @@ export default function PromotePage() {
     "INSTAGRAM",
     "FACEBOOK",
   ]);
+  const [placements, setPlacements] = useState<number[]>([0, 1, 2, 3]);
+  const [budgetType, setBudgetType] = useState<"TOTAL" | "DAILY">("TOTAL");
 
   // Simulated launch: idle → in Meta review → live.
   const [status, setStatus] = useState<LaunchStatus>("idle");
@@ -151,6 +167,12 @@ export default function PromotePage() {
       prev.includes(interest)
         ? prev.filter((i) => i !== interest)
         : [...prev, interest]
+    );
+  };
+
+  const togglePlacement = (i: number) => {
+    setPlacements((prev) =>
+      prev.includes(i) ? prev.filter((x) => x !== i) : [...prev, i]
     );
   };
 
@@ -198,9 +220,15 @@ export default function PromotePage() {
     1,
     Math.round((Date.parse(endDate) - Date.parse(startDate)) / 86_400_000) + 1
   );
-  const budgetSummary = `${budget} ${t.promote.currencySymbol} • ${fmtDate(
-    startDate
-  )} – ${fmtDate(endDate)}`;
+  const budgetSummary = `${budget} ${t.promote.currencySymbol}${
+    budgetType === "DAILY" ? ` ${t.promote.perDaySuffix}` : ""
+  } • ${fmtDate(startDate)} – ${fmtDate(endDate)}`;
+  const placementsSummary = t.promote.placementOptions
+    .filter((_, i) => placements.includes(i))
+    .join(" • ");
+  const ctaSummary = destination
+    ? `${t.promote.ctaOptions[ctaIndex]} • ${destination}`
+    : t.promote.ctaOptions[ctaIndex];
 
   // Live estimates, the way Meta shows them: the audience size comes from
   // the targeting alone; the reach also depends on the daily budget.
@@ -218,14 +246,17 @@ export default function PromotePage() {
   );
   const platformFactor =
     platforms.length === 2 ? 1.6 : platforms.length === 1 ? 1 : 0;
+  const totalSpend =
+    budgetType === "DAILY" ? budgetNumber * durationDays : budgetNumber;
   const reachTotal = Math.min(
     audienceSize * 0.9,
-    (budgetNumber / durationDays) * 55 * durationDays * platformFactor
+    totalSpend * 55 * platformFactor
   );
   const reachLow = roundNice(reachTotal * 0.7);
   const reachHigh = roundNice(reachTotal * 1.15);
-  const engagementLow = roundNice(reachTotal * 0.02);
-  const engagementHigh = roundNice(reachTotal * 0.045);
+  const [rateLow, rateHigh] = RESULT_RATES[objectiveIndex];
+  const resultLow = roundNice(reachTotal * rateLow);
+  const resultHigh = roundNice(reachTotal * rateHigh);
   const fmtNum = (n: number) => n.toLocaleString("en-US");
   const platformsSummary = platforms
     .map((p) => (p === "INSTAGRAM" ? "Instagram" : "Facebook"))
@@ -242,7 +273,10 @@ export default function PromotePage() {
   };
 
   const canLaunch =
-    status === "idle" && platforms.length > 0 && budgetNumber > 0;
+    status === "idle" &&
+    platforms.length > 0 &&
+    placements.length > 0 &&
+    budgetNumber > 0;
 
   return (
     <div className="space-y-6 animate-in fade-in duration-300">
@@ -260,6 +294,18 @@ export default function PromotePage() {
           {/* Step 1: pick a campaign and/or a product */}
           <div className="space-y-4">
             <StepTitle n={1}>{t.promote.step1Title}</StepTitle>
+            <LabeledSelect
+              label={t.promote.objectiveLabel}
+              value={String(objectiveIndex)}
+              onChange={(v) => setObjectiveIndex(Number(v))}
+            >
+              {t.promote.objectiveOptions.map((label, i) => (
+                <option key={label} value={i}>
+                  {label}
+                </option>
+              ))}
+            </LabeledSelect>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <LabeledSelect
                 label={t.promote.campaignLabel}
@@ -286,6 +332,26 @@ export default function PromotePage() {
                   </option>
                 ))}
               </LabeledSelect>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <LabeledSelect
+                label={t.promote.ctaLabel}
+                value={String(ctaIndex)}
+                onChange={(v) => setCtaIndex(Number(v))}
+              >
+                {t.promote.ctaOptions.map((label, i) => (
+                  <option key={label} value={i}>
+                    {label}
+                  </option>
+                ))}
+              </LabeledSelect>
+
+              <Input
+                label={t.promote.destinationLabel}
+                placeholder={t.promote.destinationPlaceholder}
+                value={destination}
+                onChange={(e) => setDestination(e.target.value)}
+              />
             </div>
             {isLoading && (
               <p className="text-[11px] text-txt-muted">{t.common.loading}</p>
@@ -393,7 +459,7 @@ export default function PromotePage() {
           <div className="space-y-4 pt-5 border-t border-white/10">
             <StepTitle n={3}>{t.promote.step3Title}</StepTitle>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Input
                 label={`${t.promote.budgetLabel} (${t.promote.currencySymbol})`}
                 type="number"
@@ -402,6 +468,15 @@ export default function PromotePage() {
                 value={budget}
                 onChange={(e) => setBudget(e.target.value)}
               />
+
+              <LabeledSelect
+                label={t.promote.budgetTypeLabel}
+                value={budgetType}
+                onChange={(v) => setBudgetType(v as "TOTAL" | "DAILY")}
+              >
+                <option value="TOTAL">{t.promote.budgetTotal}</option>
+                <option value="DAILY">{t.promote.budgetDaily}</option>
+              </LabeledSelect>
 
               <Input
                 label={t.promote.startDateLabel}
@@ -463,6 +538,29 @@ export default function PromotePage() {
                 </button>
               </div>
             </div>
+
+            <div>
+              <label className="block text-xs font-medium text-txt-secondary mb-1.5">
+                {t.promote.placementsLabel}
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {t.promote.placementOptions.map((label, i) => (
+                  <button
+                    key={label}
+                    type="button"
+                    onClick={() => togglePlacement(i)}
+                    aria-pressed={placements.includes(i)}
+                    className={`px-3 py-1.5 rounded-full border text-xs transition-all ${
+                      placements.includes(i)
+                        ? "bg-accent-violet/20 border-accent-violet text-white font-semibold"
+                        : "bg-white/5 border-white/10 text-txt-secondary hover:text-white"
+                    }`}
+                  >
+                    {label}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
         </Card>
 
@@ -509,10 +607,10 @@ export default function PromotePage() {
             </div>
             <div className="flex items-center justify-between gap-4">
               <span className="text-txt-muted">
-                {t.promote.estimateEngagementLabel}
+                {t.promote.resultLabels[objectiveIndex]}
               </span>
               <strong className="text-white text-end">
-                {fmtNum(engagementLow)} – {fmtNum(engagementHigh)}
+                {fmtNum(resultLow)} – {fmtNum(resultHigh)}
               </strong>
             </div>
             <div className="flex items-center justify-between gap-4">
@@ -560,6 +658,28 @@ export default function PromotePage() {
                 </span>
                 <strong className="text-white text-end">
                   {platformsSummary}
+                </strong>
+              </div>
+              <div className="flex items-center justify-between gap-4">
+                <span className="text-txt-muted">
+                  {t.promote.summaryObjectiveLabel}
+                </span>
+                <strong className="text-white text-end">
+                  {t.promote.objectiveOptions[objectiveIndex]}
+                </strong>
+              </div>
+              <div className="flex items-center justify-between gap-4">
+                <span className="text-txt-muted">
+                  {t.promote.summaryCtaLabel}
+                </span>
+                <strong className="text-white text-end">{ctaSummary}</strong>
+              </div>
+              <div className="flex items-center justify-between gap-4">
+                <span className="text-txt-muted">
+                  {t.promote.summaryPlacementsLabel}
+                </span>
+                <strong className="text-white text-end">
+                  {placementsSummary}
                 </strong>
               </div>
             </div>
