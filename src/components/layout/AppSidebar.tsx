@@ -21,6 +21,7 @@ import {
   Sparkles,
   ShoppingBag,
   Megaphone,
+  Rocket,
   PenTool,
   Calendar,
   Share2,
@@ -142,6 +143,12 @@ export const AppSidebar = React.memo(function AppSidebar() {
           href: "/campaigns",
           icon: Megaphone,
           label: t.nav.campaigns,
+        },
+        {
+          key: "promote",
+          href: "/promote",
+          icon: Rocket,
+          label: t.nav.promote,
         },
         {
           key: "contentStudio",

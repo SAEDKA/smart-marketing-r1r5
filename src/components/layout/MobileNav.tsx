@@ -21,6 +21,7 @@ import {
   Sparkles,
   ShoppingBag,
   Megaphone,
+  Rocket,
   PenTool,
   Calendar,
   Share2,
@@ -82,6 +83,7 @@ export const MobileNav = React.memo(function MobileNav({ isOpen, onClose }: Mobi
       links: [
         { href: "/products", label: t.nav.products, icon: ShoppingBag },
         { href: "/campaigns", label: t.nav.campaigns, icon: Megaphone },
+        { href: "/promote", label: t.nav.promote, icon: Rocket },
         { href: "/content-studio", label: t.nav.contentStudio, icon: Sparkles },
         { href: "/posts", label: t.nav.posts, icon: PenTool },
         { href: "/calendar", label: t.nav.calendar, icon: Calendar },

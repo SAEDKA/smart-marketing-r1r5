@@ -17,6 +17,7 @@ export const COMPANY_GATED_HREFS = [
   "/settings/brand",
   "/products",
   "/campaigns",
+  "/promote",
   "/content-studio",
   "/posts",
   "/calendar",

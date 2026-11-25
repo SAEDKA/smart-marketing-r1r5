@@ -58,6 +58,7 @@ export const TopHeader = React.memo(function TopHeader({ onOpenMobileNav }: TopH
     if (pathname.includes("/settings/brand")) return t.nav.brandSettings;
     if (pathname.includes("/products")) return t.nav.products;
     if (pathname.includes("/campaigns")) return t.nav.campaigns;
+    if (pathname.includes("/promote")) return t.nav.promote;
     if (pathname.includes("/content-studio")) return t.nav.contentStudio;
     if (pathname.includes("/posts")) return t.nav.posts;
     if (pathname.includes("/calendar")) return t.nav.calendar;
